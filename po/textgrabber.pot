@@ -1,0 +1,344 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: textgrabber\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-06-19 21:00-0400\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: extension.js
+msgid "TextGrabber"
+msgstr ""
+
+#: extension.js
+msgid "Text captured and copied to clipboard!"
+msgstr ""
+
+#: extension.js
+msgid "Error running the script."
+msgstr ""
+
+#: extension.js
+msgid "Error: "
+msgstr ""
+
+#: prefs.js
+msgid "Show button in top bar"
+msgstr ""
+
+#: prefs.js
+msgid "Keyboard shortcut"
+msgstr ""
+
+#: prefs.js
+msgid "Text Languages"
+msgstr ""
+
+#: prefs.js
+msgid "Select languages for OCR"
+msgstr ""
+
+#: prefs.js
+msgid "Afrikaans"
+msgstr ""
+
+#: prefs.js
+msgid "Albanian"
+msgstr ""
+
+#: prefs.js
+msgid "Amharic"
+msgstr ""
+
+#: prefs.js
+msgid "Arabic"
+msgstr ""
+
+#: prefs.js
+msgid "Armenian"
+msgstr ""
+
+#: prefs.js
+msgid "Azerbaijani"
+msgstr ""
+
+#: prefs.js
+msgid "Basque"
+msgstr ""
+
+#: prefs.js
+msgid "Belarusian"
+msgstr ""
+
+#: prefs.js
+msgid "Bengali"
+msgstr ""
+
+#: prefs.js
+msgid "Bosnian"
+msgstr ""
+
+#: prefs.js
+msgid "Bulgarian"
+msgstr ""
+
+#: prefs.js
+msgid "Burmese"
+msgstr ""
+
+#: prefs.js
+msgid "Catalan"
+msgstr ""
+
+#: prefs.js
+msgid "Cebuano"
+msgstr ""
+
+#: prefs.js
+msgid "Cherokee"
+msgstr ""
+
+#: prefs.js
+msgid "Chinese (Simplified)"
+msgstr ""
+
+#: prefs.js
+msgid "Chinese (Traditional)"
+msgstr ""
+
+#: prefs.js
+msgid "Croatian"
+msgstr ""
+
+#: prefs.js
+msgid "Czech"
+msgstr ""
+
+#: prefs.js
+msgid "Danish"
+msgstr ""
+
+#: prefs.js
+msgid "Dutch"
+msgstr ""
+
+#: prefs.js
+msgid "English"
+msgstr ""
+
+#: prefs.js
+msgid "Esperanto"
+msgstr ""
+
+#: prefs.js
+msgid "Estonian"
+msgstr ""
+
+#: prefs.js
+msgid "Finnish"
+msgstr ""
+
+#: prefs.js
+msgid "French"
+msgstr ""
+
+#: prefs.js
+msgid "Galician"
+msgstr ""
+
+#: prefs.js
+msgid "Georgian"
+msgstr ""
+
+#: prefs.js
+msgid "German"
+msgstr ""
+
+#: prefs.js
+msgid "Greek"
+msgstr ""
+
+#: prefs.js
+msgid "Gujarati"
+msgstr ""
+
+#: prefs.js
+msgid "Hebrew"
+msgstr ""
+
+#: prefs.js
+msgid "Hindi"
+msgstr ""
+
+#: prefs.js
+msgid "Hungarian"
+msgstr ""
+
+#: prefs.js
+msgid "Icelandic"
+msgstr ""
+
+#: prefs.js
+msgid "Indonesian"
+msgstr ""
+
+#: prefs.js
+msgid "Italian"
+msgstr ""
+
+#: prefs.js
+msgid "Japanese"
+msgstr ""
+
+#: prefs.js
+msgid "Kannada"
+msgstr ""
+
+#: prefs.js
+msgid "Khmer"
+msgstr ""
+
+#: prefs.js
+msgid "Korean"
+msgstr ""
+
+#: prefs.js
+msgid "Lao"
+msgstr ""
+
+#: prefs.js
+msgid "Latvian"
+msgstr ""
+
+#: prefs.js
+msgid "Lithuanian"
+msgstr ""
+
+#: prefs.js
+msgid "Macedonian"
+msgstr ""
+
+#: prefs.js
+msgid "Malay"
+msgstr ""
+
+#: prefs.js
+msgid "Malayalam"
+msgstr ""
+
+#: prefs.js
+msgid "Maltese"
+msgstr ""
+
+#: prefs.js
+msgid "Marathi"
+msgstr ""
+
+#: prefs.js
+msgid "Nepali"
+msgstr ""
+
+#: prefs.js
+msgid "Norwegian"
+msgstr ""
+
+#: prefs.js
+msgid "Persian"
+msgstr ""
+
+#: prefs.js
+msgid "Polish"
+msgstr ""
+
+#: prefs.js
+msgid "Portuguese"
+msgstr ""
+
+#: prefs.js
+msgid "Punjabi"
+msgstr ""
+
+#: prefs.js
+msgid "Romanian"
+msgstr ""
+
+#: prefs.js
+msgid "Russian"
+msgstr ""
+
+#: prefs.js
+msgid "Serbian"
+msgstr ""
+
+#: prefs.js
+msgid "Sinhala"
+msgstr ""
+
+#: prefs.js
+msgid "Slovak"
+msgstr ""
+
+#: prefs.js
+msgid "Slovenian"
+msgstr ""
+
+#: prefs.js
+msgid "Spanish"
+msgstr ""
+
+#: prefs.js
+msgid "Swahili"
+msgstr ""
+
+#: prefs.js
+msgid "Swedish"
+msgstr ""
+
+#: prefs.js
+msgid "Tamil"
+msgstr ""
+
+#: prefs.js
+msgid "Telugu"
+msgstr ""
+
+#: prefs.js
+msgid "Thai"
+msgstr ""
+
+#: prefs.js
+msgid "Tibetan"
+msgstr ""
+
+#: prefs.js
+msgid "Turkish"
+msgstr ""
+
+#: prefs.js
+msgid "Ukrainian"
+msgstr ""
+
+#: prefs.js
+msgid "Urdu"
+msgstr ""
+
+#: prefs.js
+msgid "Vietnamese"
+msgstr ""
+
+#: prefs.js
+msgid "Welsh"
+msgstr ""
+
+#: prefs.js
+msgid "Yiddish"
+msgstr ""

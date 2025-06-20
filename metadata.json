@@ -1,0 +1,13 @@
+{
+  "name": "TextGrabber",
+  "description": "A GNOME Extension to grab text on the screen using OCR.",
+  "uuid": "textgrabber@pierrethibault.dev",
+  "shell-version": [
+    "46",
+    "47",
+    "48"
+  ],
+  "url": "https://github.com/ton-projet/textgrabber",
+  "settings-schema": "org.gnome.shell.extensions.textgrabber",
+  "gettext-domain": "textgrabber"
+}

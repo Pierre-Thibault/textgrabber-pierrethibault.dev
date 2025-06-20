@@ -1,0 +1,261 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: textgrabber\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-06-19 21:00-0400\n"
+"PO-Revision-Date: 2025-06-19 21:00-0400\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: French <fr@li.org>\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "TextGrabber"
+msgstr "TextGrabber"
+
+msgid "Text captured and copied to clipboard!"
+msgstr "Texte capturé et copié dans le presse-papiers !"
+
+msgid "Error running the script."
+msgstr "Erreur lors de l'exécution du script."
+
+msgid "Error: "
+msgstr "Erreur : "
+
+msgid "Show button in top bar"
+msgstr "Afficher le bouton dans la barre supérieure"
+
+msgid "Keyboard shortcut"
+msgstr "Raccourci clavier"
+
+msgid "Text Languages"
+msgstr "Langues du texte"
+
+msgid "Select languages for OCR"
+msgstr "Sélectionnez les langues pour l'OCR"
+
+msgid "Invalid shortcut"
+msgstr "Raccourci invalide"
+
+msgid "Afrikaans"
+msgstr "Afrikaans"
+
+msgid "Albanian"
+msgstr "Albanais"
+
+msgid "Amharic"
+msgstr "Amharique"
+
+msgid "Arabic"
+msgstr "Arabe"
+
+msgid "Armenian"
+msgstr "Arménien"
+
+msgid "Azerbaijani"
+msgstr "Azerbaïdjanais"
+
+msgid "Basque"
+msgstr "Basque"
+
+msgid "Belarusian"
+msgstr "Biélorusse"
+
+msgid "Bengali"
+msgstr "Bengali"
+
+msgid "Bosnian"
+msgstr "Bosnien"
+
+msgid "Bulgarian"
+msgstr "Bulgare"
+
+msgid "Burmese"
+msgstr "Birman"
+
+msgid "Catalan"
+msgstr "Catalan"
+
+msgid "Cebuano"
+msgstr "Cebuano"
+
+msgid "Cherokee"
+msgstr "Cherokee"
+
+msgid "Chinese (Simplified)"
+msgstr "Chinois (simplifié)"
+
+msgid "Chinese (Traditional)"
+msgstr "Chinois (traditionnel)"
+
+msgid "Croatian"
+msgstr "Croate"
+
+msgid "Czech"
+msgstr "Tchèque"
+
+msgid "Danish"
+msgstr "Danois"
+
+msgid "Dutch"
+msgstr "Néerlandais"
+
+msgid "English"
+msgstr "Anglais"
+
+msgid "Esperanto"
+msgstr "Espéranto"
+
+msgid "Estonian"
+msgstr "Estonien"
+
+msgid "Finnish"
+msgstr "Finnois"
+
+msgid "French"
+msgstr "Français"
+
+msgid "Galician"
+msgstr "Galicien"
+
+msgid "Georgian"
+msgstr "Géorgien"
+
+msgid "German"
+msgstr "Allemand"
+
+msgid "Greek"
+msgstr "Grec"
+
+msgid "Gujarati"
+msgstr "Gujarati"
+
+msgid "Hebrew"
+msgstr "Hébreu"
+
+msgid "Hindi"
+msgstr "Hindi"
+
+msgid "Hungarian"
+msgstr "Hongrois"
+
+msgid "Icelandic"
+msgstr "Islandais"
+
+msgid "Indonesian"
+msgstr "Indonésien"
+
+msgid "Italian"
+msgstr "Italien"
+
+msgid "Japanese"
+msgstr "Japonais"
+
+msgid "Kannada"
+msgstr "Kannada"
+
+msgid "Khmer"
+msgstr "Khmer"
+
+msgid "Korean"
+msgstr "Coréen"
+
+msgid "Lao"
+msgstr "Lao"
+
+msgid "Latvian"
+msgstr "Letton"
+
+msgid "Lithuanian"
+msgstr "Lituanien"
+
+msgid "Macedonian"
+msgstr "Macédonien"
+
+msgid "Malay"
+msgstr "Malais"
+
+msgid "Malayalam"
+msgstr "Malayalam"
+
+msgid "Maltese"
+msgstr "Maltais"
+
+msgid "Marathi"
+msgstr "Marathi"
+
+msgid "Nepali"
+msgstr "Népalais"
+
+msgid "Norwegian"
+msgstr "Norvégien"
+
+msgid "Persian"
+msgstr "Persan"
+
+msgid "Polish"
+msgstr "Polonais"
+
+msgid "Portuguese"
+msgstr "Portugais"
+
+msgid "Punjabi"
+msgstr "Pendjabi"
+
+msgid "Romanian"
+msgstr "Roumain"
+
+msgid "Russian"
+msgstr "Russe"
+
+msgid "Serbian"
+msgstr "Serbe"
+
+msgid "Sinhala"
+msgstr "Sinhala"
+
+msgid "Slovak"
+msgstr "Slovaque"
+
+msgid "Slovenian"
+msgstr "Slovène"
+
+msgid "Spanish"
+msgstr "Espagnol"
+
+msgid "Swahili"
+msgstr "Swahili"
+
+msgid "Swedish"
+msgstr "Suédois"
+
+msgid "Tamil"
+msgstr "Tamoul"
+
+msgid "Telugu"
+msgstr "Telugu"
+
+msgid "Thai"
+msgstr "Thaï"
+
+msgid "Tibetan"
+msgstr "Tibétain"
+
+msgid "Turkish"
+msgstr "Turc"
+
+msgid "Ukrainian"
+msgstr "Ukrainien"
+
+msgid "Urdu"
+msgstr "Ourdou"
+
+msgid "Vietnamese"
+msgstr "Vietnamien"
+
+msgid "Welsh"
+msgstr "Gallois"
+
+msgid "Yiddish"
+msgstr "Yiddish"

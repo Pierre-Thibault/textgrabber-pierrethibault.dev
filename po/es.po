@@ -1,0 +1,261 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: textgrabber\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-06-19 21:00-0400\n"
+"PO-Revision-Date: 2025-06-19 21:00-0400\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: Spanish <es@li.org>\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "TextGrabber"
+msgstr "TextGrabber"
+
+msgid "Text captured and copied to clipboard!"
+msgstr "¡Texto capturado y copiado al portapapeles!"
+
+msgid "Error running the script."
+msgstr "Error al ejecutar el script."
+
+msgid "Error: "
+msgstr "Error: "
+
+msgid "Show button in top bar"
+msgstr "Mostrar el botón en la barra superior"
+
+msgid "Keyboard shortcut"
+msgstr "Atajo de teclado"
+
+msgid "Text Languages"
+msgstr "Idiomas del texto"
+
+msgid "Select languages for OCR"
+msgstr "Selecciona los idiomas para el OCR"
+
+msgid "Invalid shortcut"
+msgstr "Atajo inválido"
+
+msgid "Afrikaans"
+msgstr "Afrikáans"
+
+msgid "Albanian"
+msgstr "Albanés"
+
+msgid "Amharic"
+msgstr "Amárico"
+
+msgid "Arabic"
+msgstr "Árabe"
+
+msgid "Armenian"
+msgstr "Armenio"
+
+msgid "Azerbaijani"
+msgstr "Azerbaiyano"
+
+msgid "Basque"
+msgstr "Vasco"
+
+msgid "Belarusian"
+msgstr "Bielorruso"
+
+msgid "Bengali"
+msgstr "Bengalí"
+
+msgid "Bosnian"
+msgstr "Bosnio"
+
+msgid "Bulgarian"
+msgstr "Búlgaro"
+
+msgid "Burmese"
+msgstr "Birmano"
+
+msgid "Catalan"
+msgstr "Catalán"
+
+msgid "Cebuano"
+msgstr "Cebuano"
+
+msgid "Cherokee"
+msgstr "Cherokee"
+
+msgid "Chinese (Simplified)"
+msgstr "Chino (simplificado)"
+
+msgid "Chinese (Traditional)"
+msgstr "Chino (tradicional)"
+
+msgid "Croatian"
+msgstr "Croata"
+
+msgid "Czech"
+msgstr "Checo"
+
+msgid "Danish"
+msgstr "Danés"
+
+msgid "Dutch"
+msgstr "Neerlandés"
+
+msgid "English"
+msgstr "Inglés"
+
+msgid "Esperanto"
+msgstr "Esperanto"
+
+msgid "Estonian"
+msgstr "Estonio"
+
+msgid "Finnish"
+msgstr "Finés"
+
+msgid "French"
+msgstr "Francés"
+
+msgid "Galician"
+msgstr "Gallego"
+
+msgid "Georgian"
+msgstr "Georgiano"
+
+msgid "German"
+msgstr "Alemán"
+
+msgid "Greek"
+msgstr "Griego"
+
+msgid "Gujarati"
+msgstr "Guyaratí"
+
+msgid "Hebrew"
+msgstr "Hebreo"
+
+msgid "Hindi"
+msgstr "Hindi"
+
+msgid "Hungarian"
+msgstr "Húngaro"
+
+msgid "Icelandic"
+msgstr "Islandés"
+
+msgid "Indonesian"
+msgstr "Indonesio"
+
+msgid "Italian"
+msgstr "Italiano"
+
+msgid "Japanese"
+msgstr "Japonés"
+
+msgid "Kannada"
+msgstr "Canarés"
+
+msgid "Khmer"
+msgstr "Jemer"
+
+msgid "Korean"
+msgstr "Coreano"
+
+msgid "Lao"
+msgstr "Lao"
+
+msgid "Latvian"
+msgstr "Letón"
+
+msgid "Lithuanian"
+msgstr "Lituano"
+
+msgid "Macedonian"
+msgstr "Macedonio"
+
+msgid "Malay"
+msgstr "Malayo"
+
+msgid "Malayalam"
+msgstr "Malayalam"
+
+msgid "Maltese"
+msgstr "Maltés"
+
+msgid "Marathi"
+msgstr "Maratí"
+
+msgid "Nepali"
+msgstr "Nepalí"
+
+msgid "Norwegian"
+msgstr "Noruego"
+
+msgid "Persian"
+msgstr "Persa"
+
+msgid "Polish"
+msgstr "Polaco"
+
+msgid "Portuguese"
+msgstr "Portugués"
+
+msgid "Punjabi"
+msgstr "Punyabí"
+
+msgid "Romanian"
+msgstr "Rumano"
+
+msgid "Russian"
+msgstr "Ruso"
+
+msgid "Serbian"
+msgstr "Serbio"
+
+msgid "Sinhala"
+msgstr "Cingalés"
+
+msgid "Slovak"
+msgstr "Eslovaco"
+
+msgid "Slovenian"
+msgstr "Esloveno"
+
+msgid "Spanish"
+msgstr "Español"
+
+msgid "Swahili"
+msgstr "Suajili"
+
+msgid "Swedish"
+msgstr "Sueco"
+
+msgid "Tamil"
+msgstr "Tamil"
+
+msgid "Telugu"
+msgstr "Telugu"
+
+msgid "Thai"
+msgstr "Tailandés"
+
+msgid "Tibetan"
+msgstr "Tibetano"
+
+msgid "Turkish"
+msgstr "Turco"
+
+msgid "Ukrainian"
+msgstr "Ucraniano"
+
+msgid "Urdu"
+msgstr "Urdu"
+
+msgid "Vietnamese"
+msgstr "Vietnamita"
+
+msgid "Welsh"
+msgstr "Galés"
+
+msgid "Yiddish"
+msgstr "Yidis"

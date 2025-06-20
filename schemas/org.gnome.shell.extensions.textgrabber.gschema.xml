@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist>
+  <schema id="org.gnome.shell.extensions.textgrabber" path="/org/gnome/shell/extensions/textgrabber/">
+    <key name="show-button" type="b">
+      <default>true</default>
+      <summary>Show button</summary>
+      <description>Determines if the TextGrabber button appears in the top bar.</description>
+    </key>
+    <key name="shortcut" type="as">
+      <default>['<Super>t']</default>
+      <summary>Keyboard shortcut</summary>
+      <description>Shortcut to trigger the TextGrabber action.</description>
+    </key>
+    <key name="tesseract-languages" type="as">
+      <default>['eng']</default>
+      <summary>Tesseract languages</summary>
+      <description>Languages used by Tesseract for OCR.</description>
+    </key>
+  </schema>
+</schemalist>
