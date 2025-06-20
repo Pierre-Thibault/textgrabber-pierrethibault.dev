@@ -140,7 +140,7 @@
             description = "A GNOME Extension to grab text on the screen using OCR.";
             license = licenses.gpl3;
             platforms = platforms.all;
-            maintainers = [ "pierrethibault" ];
+            maintainers = [ "Pierre-Thibault" ];
           };
         };
 
