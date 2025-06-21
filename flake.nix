@@ -115,7 +115,7 @@
           # Script to run when nix build is invocated
           buildPhase = ''
             ./schemas/glib-compile-schemas.sh
-            chmod +x textgrabber.sh
+            xgettext --from-code=UTF-8 -p po -o textgrabber.pot *.js
             mkdir -p locale/{fr,en,es}/LC_MESSAGES
             msgfmt po/fr.po -o locale/fr/LC_MESSAGES/textgrabber.mo
             msgfmt po/en.po -o locale/en/LC_MESSAGES/textgrabber.mo
