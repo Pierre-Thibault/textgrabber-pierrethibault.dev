@@ -7,7 +7,7 @@
   };
 
   outputs =
-    { nixpkgs, flake-utils }:
+    { nixpkgs, flake-utils, ... }:
     flake-utils.lib.eachDefaultSystem (
       system:
       let
@@ -97,11 +97,10 @@
 
           # Dependencies needed at runtime
           buildInputs = with pkgs; [
-            gnome.gnome-shell
             glib
             gettext
             (tesseract4.override { enableLanguages = tesseractLanguages; })
-            gnome.gnome-screenshot
+            gnome-screenshot
             wl-clipboard
             xsel
           ];
@@ -112,9 +111,9 @@
             gettext
           ];
 
-          # Script to run when nix build is invocated
+          # Script to run before build (active in the current directory)
           buildPhase = ''
-            ./schemas/glib-compile-schemas.sh
+            glib-compile-schemas schemas
             xgettext --from-code=UTF-8 -p po -o textgrabber.pot *.js
             mkdir -p locale/{fr,en,es}/LC_MESSAGES
             msgfmt po/fr.po -o locale/fr/LC_MESSAGES/textgrabber.mo
@@ -125,15 +124,25 @@
           # Script to run install phase
           installPhase =
             let
-              extension_name = "textgrabber@pierre.thibault@pierrethibault.dev";
+              extension_name = "textgrabber@pierrethibault.dev";
             in
             let
-              output_dir = "~/.local/share/gnome-shell/extensions/${extension_name}";
+              output_dir = "$out/${extension_name}";
             in
             ''
               mkdir -p "${output_dir}"
-              cp -r *.png *.js *.sh metadata.json schemas locale "${output_dir}/"
-              gnome-extensions enable textgrabber@pierrethibault.dev
+              cp -r extension.js \
+                 icon.png \
+                 LICENSE \
+                 locale \
+                 metadata.json \
+                 po \
+                 prefs.js \
+                 textgrabber.sh \
+                 org.gnome.shell.extensions.textgrabber.gschema.xml \
+                 "${output_dir}/"
+              echo "Extension produced at: ${output_dir}"
+              # gnome-extensions enable textgrabber@pierrethibault.dev
             '';
 
           meta = with pkgs.lib; {
@@ -147,22 +156,19 @@
         # Packages needed to develop, invoked by nix develop
         devShells.default = pkgs.mkShell {
           buildInputs = with pkgs; [
-            gnome.gnome-shell
             glib
             gettext
-            nodejs
-            gnome.gnome-shell-extensions
-            gnome.gnome-tweaks
             (tesseract4.override { enableLanguages = tesseractLanguages; })
-            gnome.gnome-screenshot
+            gnome-screenshot
             wl-clipboard
             xsel
           ];
+          shellHook = ''
+            chmod +x textgrabber.sh
+            chmod +x schemas/glib-compile-schemas.sh
+            echo "Installed Tesseract languages: $(tesseract --list-langs)"
+          '';
         };
-
-        shellHook = ''
-          echo "Installed Tesseract languages: $(tesseract --list-langs)"
-        '';
       }
     );
 }

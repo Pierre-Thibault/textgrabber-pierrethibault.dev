@@ -259,3 +259,10 @@ msgstr "Gallois"
 
 msgid "Yiddish"
 msgstr "Yiddish"
+
+msgid "The required command \"{0}\" is not available. Please install it to use the {1} feature."
+msgstr "La commande requise \"{0}\" n'est pas disponible. Veuillez l'installer pour utiliser la fonctionnalité {1}."
+
+msgid "Activation failed: Missing dependencies: {0}"
+msgstr "Échec de l'activation : Dépendances manquantes : {0}"
+

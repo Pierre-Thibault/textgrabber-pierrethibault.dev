@@ -1,6 +1,9 @@
-const { St, Clutter, Gio, GLib } = imports.gi;
-const Main = imports.ui.main;
-const Gettext = imports.gettext;
+import St from 'gi://St';
+import Gio from 'gi://Gio';
+import GLib from 'gi://Glib';
+
+import * as Main from 'resource://org/gnome/shell/ui/main.js';
+import * as Gettext from gettext;
 
 Gettext.textdomain('textgrabber');
 const _ = Gettext.gettext;
@@ -12,6 +15,26 @@ class Extension {
     }
 
     enable() {
+        const dependencies = {
+            tesseract: 'tesseract',
+            gnomeScreenshot: 'gnome-screenshot',
+            clipboard: GLib.getenv('XDG_SESSION_TYPE') === 'wayland' ? 'wl-copy' : 'xsel'
+        };
+
+        const missingDependencies = [];
+
+        for (let [name, command] of Object.entries(dependencies)) {
+            if (!GLib.find_program_in_path(command)) {
+                missingDependencies.push(command);
+                Main.notifyError(_('TextGrabber'), _(`The required command "${command}" is not available. Please install it to use the ${name} feature.`));
+            }
+        }
+
+        if (missingDependencies.length !== 0) {
+            // Lancer une exception pour indiquer l'échec de l'activation
+            throw new Error(_('Activation failed: Missing dependencies: ') + missingDependencies.join(', '));
+        }
+        
         // Load settings
         this._settings = new Gio.Settings({
             schema_id: 'org.gnome.shell.extensions.textgrabber'
@@ -42,7 +65,7 @@ class Extension {
             // Use an icon instead of text
             let icon = new St.Icon({
                 icon_name: 'edit-copy-symbolic', // Fallback system icon
-                g_icon: Gio.icon_new_for_string(GLib.build_filenamev(['', GLib.get_user_data_dir(), 'gnome-shell', 'extensions/textgrabber@your-domain.com', 'icon.png'])),
+                g_icon: Gio.icon_new_for_string(GLib.build_filenamev(['', GLib.get_user_data_dir(), 'gnome-shell', 'extensions/textgrabber@pierrethibault.dev', 'icon.png'])),
                 style_class: 'system-status-icon'
             });
 
@@ -85,7 +108,7 @@ class Extension {
         try {
             let languages = this._settings.get_strv('tesseract-languages');
             let langString = languages.length > 0 ? languages.join('+') : 'eng';
-            let extensionPath = GLib.get_user_data_dir() + '/gnome/shell/extensions/textgrabber@your-domain.com';
+            let extensionPath = GLib.get_user_data_dir() + '/gnome/shell/extensions/textgrabber@pierrethibault.dev';
             let scriptPath = extensionPath + '/textgrabber.sh';
             let [success, _pid] = GLib.spawn_command_line_async(`${scriptPath} ${langString}`);
             if (success) {
@@ -109,7 +132,7 @@ class Extension {
 }
 
 function init() {
-    let localeDir = GLib.get_user_data_dir() + '/gnome-shell/extensions/textgrabber@your-domain.com/locale';
+    let localeDir = GLib.get_user_data_dir() + '/gnome-shell/extensions/textgrabber@pierrethibault.dev/locale';
     Gettext.bindtextdomain('textgrabber', localeDir);
     return new Extension();
 }

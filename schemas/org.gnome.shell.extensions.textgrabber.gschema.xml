@@ -7,7 +7,7 @@
       <description>Determines if the TextGrabber button appears in the top bar.</description>
     </key>
     <key name="shortcut" type="as">
-      <default>['<Super>t']</default>
+      <default>['&lt;Super&gt;t']</default>
       <summary>Keyboard shortcut</summary>
       <description>Shortcut to trigger the TextGrabber action.</description>
     </key>

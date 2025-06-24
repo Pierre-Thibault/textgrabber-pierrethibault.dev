@@ -1,5 +1,8 @@
-const { Adw, Gtk, Gio, GLib } = imports.gi;
-const Gettext = imports.gettext;
+import Adw from "gi://Adw";
+import Gtk from "gi://Gtk";
+import Gio from "gi://Gio";
+import GLib from "gi://GLib"
+import * as Gettext from gettext;
 
 Gettext.textdomain('textgrabber');
 const _ = Gettext.gettext;

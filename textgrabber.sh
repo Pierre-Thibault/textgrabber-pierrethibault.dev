@@ -14,4 +14,3 @@ if [[ "$XDG_SESSION_TYPE" == "wayland" ]]; then
 else
   xsel -bi < "$SCR_IMG.txt"
 fi
-
