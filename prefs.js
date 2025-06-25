@@ -2,10 +2,7 @@ import Adw from "gi://Adw";
 import Gtk from "gi://Gtk";
 import Gio from "gi://Gio";
 import GLib from "gi://GLib"
-import * as Gettext from gettext;
-
-Gettext.textdomain('textgrabber');
-const _ = Gettext.gettext;
+import { gettext as _ } from 'resource:///org/gnome/shell/extensions/extension.js';
 
 // List of all possible Tesseract languages with translatable names
 const allTesseractLanguages = [
@@ -85,15 +82,8 @@ const allTesseractLanguages = [
     { name: 'Yiddish', code: 'yid' }
 ];
 
-function init() {
-    let localeDir = Gio.File.new_for_path(GLib.get_user_data_dir() + '/gnome-shell/extensions/textgrabber@your-domain.com/locale');
-    Gettext.bindtextdomain('textgrabber', localeDir.get_path());
-}
-
 function fillPreferencesWindow(window) {
-    const settings = new Gio.Settings({
-        schema_id: 'org.gnome.shell.extensions.textgrabber'
-    });
+    const settings = this.getSettings();
 
     // Get installed Tesseract languages
     let installedLanguages = [];

@@ -3,11 +3,16 @@
 
 LANGUAGES=${1:-"eng"} # Utilise l'argument ou 'eng' par défaut
 SCR_IMG=$(mktemp)
-trap "rm $SCR_IMG*" EXIT
+trap 'rm $SCR_IMG*' EXIT
 
 gnome-screenshot -a -f "$SCR_IMG.png"
 
 tesseract "$SCR_IMG.png" "$SCR_IMG" -l "$LANGUAGES" &> /dev/null
+
+if [ ! -s "$SCR_IMG.txt" ]; then  # Unable to read text
+  echo -ne '\007'  # Beep
+  exit 1
+fi
 
 if [[ "$XDG_SESSION_TYPE" == "wayland" ]]; then
   wl-copy -n < "$SCR_IMG.txt" 

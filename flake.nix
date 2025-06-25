@@ -119,6 +119,7 @@
             msgfmt po/fr.po -o locale/fr/LC_MESSAGES/textgrabber.mo
             msgfmt po/en.po -o locale/en/LC_MESSAGES/textgrabber.mo
             msgfmt po/es.po -o locale/es/LC_MESSAGES/textgrabber.mo
+            chmod +x textgrabber.sh
           '';
 
           # Script to run install phase
@@ -139,7 +140,7 @@
                  po \
                  prefs.js \
                  textgrabber.sh \
-                 org.gnome.shell.extensions.textgrabber.gschema.xml \
+                 schemas \
                  "${output_dir}/"
               echo "Extension produced at: ${output_dir}"
               # gnome-extensions enable textgrabber@pierrethibault.dev
@@ -164,8 +165,6 @@
             xsel
           ];
           shellHook = ''
-            chmod +x textgrabber.sh
-            chmod +x schemas/glib-compile-schemas.sh
             echo "Installed Tesseract languages: $(tesseract --list-langs)"
           '';
         };
