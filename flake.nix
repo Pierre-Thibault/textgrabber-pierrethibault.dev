@@ -111,7 +111,6 @@
             gettext
           ];
 
-          # Script to run before build
           buildPhase = ''
             glib-compile-schemas schemas
             xgettext --from-code=UTF-8 -p po -o textgrabber.pot *.js
@@ -122,7 +121,6 @@
             chmod +x textgrabber.sh
           '';
 
-          # Script to run install phase
           installPhase =
             let
               extension_name = "textgrabber@pierrethibault.dev";
@@ -133,7 +131,6 @@
             ''
               mkdir -p "${output_dir}"
               cp -r \
-                 icon.png \
                  LICENSE \
                  locale \
                  metadata.json \

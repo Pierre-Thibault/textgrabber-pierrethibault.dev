@@ -60,8 +60,8 @@ export default class extends Extension {
 
       // Use an icon instead of text
       let icon = new St.Icon({
-        icon_name: 'edit-copy-symbolic', // Fallback system icon
-        gicon: Gio.icon_new_for_string(GLib.build_filenamev(['', GLib.get_user_data_dir(), 'gnome-shell', 'extensions/textgrabber@pierrethibault.dev', 'icon.png'])),
+        icon_name: 'zoom-fit-best-symbolic', // edit-copy-symbolic', // Fallback system icon
+        // gicon: Gio.icon_new_for_string(this.path + '/icon-light.png'),
         style_class: 'system-status-icon'
       });
 
@@ -104,8 +104,7 @@ export default class extends Extension {
     try {
       let languages = this._settings.get_strv(KEYS.tesseract_languages);
       let langString = languages.length > 0 ? languages.join('+') : 'eng';
-      let extensionPath = GLib.get_user_data_dir() + '/gnome-shell/extensions/textgrabber@pierrethibault.dev';
-      let scriptPath = extensionPath + '/textgrabber.sh';
+      let scriptPath = this.path + '/textgrabber.sh';
       GLib.spawn_command_line_async(`${scriptPath} ${langString}`);
     } catch (e) {
       Main.notifyError(_('TextGrabber'), _('Error: ') + e.message);
