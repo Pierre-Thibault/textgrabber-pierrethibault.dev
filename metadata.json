@@ -8,5 +8,6 @@
     "48"
   ],
   "url": "https://github.com/Pierre-Thibault/textgrabber-pierrethibault.dev",
-  "settings-schema": "org.gnome.shell.extensions.textgrabber"
+  "settings-schema": "org.gnome.shell.extensions.textgrabber",
+  "gettext-domain": "textgrabber"
 }

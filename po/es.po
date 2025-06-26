@@ -266,3 +266,17 @@ msgstr "El comando requerido \"{0}\" no está disponible. Por favor, instálelo 
 msgid "Activation failed: Missing dependencies: {0}"
 msgstr "Fallo de activación: Dependencias faltantes: {0}"
 
+msgid "Shortcut"
+msgstr "Atajo"
+
+msgid "Toggle shortcut"
+msgstr "Atajo de teclado"
+
+msgid "Use Backspace to clear"
+msgstr "Retroceso para borrar"
+
+msgid "New accelerator…"
+msgstr "Nuevo acelerador…"
+
+msgid "currentLanguage"
+msgstr "es"

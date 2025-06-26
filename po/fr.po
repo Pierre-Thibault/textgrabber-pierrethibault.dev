@@ -266,3 +266,17 @@ msgstr "La commande requise \"{0}\" n'est pas disponible. Veuillez l'installer p
 msgid "Activation failed: Missing dependencies: {0}"
 msgstr "Échec de l'activation : Dépendances manquantes : {0}"
 
+msgid "Shortcut"
+msgstr "Raccourci"
+
+msgid "Toggle shortcut"
+msgstr "Raccourci clavier"
+
+msgid "Use Backspace to clear"
+msgstr "Espace arrière pour effacer"
+
+msgid "New accelerator…"
+msgstr "Nouvel accélérateur…"
+
+msgid "currentLanguage"
+msgstr "fr"

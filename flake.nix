@@ -111,7 +111,7 @@
             gettext
           ];
 
-          # Script to run before build (active in the current directory)
+          # Script to run before build
           buildPhase = ''
             glib-compile-schemas schemas
             xgettext --from-code=UTF-8 -p po -o textgrabber.pot *.js
@@ -132,18 +132,16 @@
             in
             ''
               mkdir -p "${output_dir}"
-              cp -r extension.js \
+              cp -r \
                  icon.png \
                  LICENSE \
                  locale \
                  metadata.json \
-                 po \
-                 prefs.js \
+                 *.js \
                  textgrabber.sh \
-                 schemas \
                  "${output_dir}/"
-              echo "Extension produced at: ${output_dir}"
-              # gnome-extensions enable textgrabber@pierrethibault.dev
+              mkdir -p "${output_dir}/schemas"
+              cp schemas/gschemas.compiled "${output_dir}/schemas"
             '';
 
           meta = with pkgs.lib; {

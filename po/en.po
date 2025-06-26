@@ -265,3 +265,18 @@ msgstr "The required command \"{0}\" is not available. Please install it to use 
 
 msgid "Activation failed: Missing dependencies: {0}"
 msgstr "Activation failed: Missing dependencies: {0}"
+
+msgid "Shortcut"
+msgstr "Shortcut"
+
+msgid "Toggle shortcut"
+msgstr "Toggle shortcut"
+
+msgid "Use Backspace to clear"
+msgstr "Use Backspace to clear"
+
+msgid "New accelerator…"
+msgstr "New accelerator…"
+
+msgid "currentLanguage"
+msgstr "en"
