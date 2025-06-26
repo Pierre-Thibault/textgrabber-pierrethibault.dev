@@ -60,8 +60,7 @@ export default class extends Extension {
 
       // Use an icon instead of text
       let icon = new St.Icon({
-        icon_name: 'zoom-fit-best-symbolic', // edit-copy-symbolic', // Fallback system icon
-        // gicon: Gio.icon_new_for_string(this.path + '/icon-light.png'),
+        icon_name: 'zoom-fit-best-symbolic',
         style_class: 'system-status-icon'
       });
 
