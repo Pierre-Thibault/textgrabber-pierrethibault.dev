@@ -1,5 +1,5 @@
 {
-  "name": "TextGrabber",
+  "name": "Text Grabber",
   "description": "A GNOME Extension to grab text on the screen using OCR.",
   "uuid": "textgrabber@pierrethibault.dev",
   "shell-version": [
