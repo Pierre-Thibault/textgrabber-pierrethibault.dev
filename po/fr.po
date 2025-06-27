@@ -2,284 +2,372 @@ msgid ""
 msgstr ""
 "Project-Id-Version: textgrabber\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-06-19 21:00-0400\n"
+"POT-Creation-Date: 2025-06-27 18:10-0400\n"
 "PO-Revision-Date: 2025-06-19 21:00-0400\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Last-Translator: Pierre Thibault <pierre.thibault@pierrethibault.dev>\n"
 "Language-Team: French <fr@li.org>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+#: extension.js:58
+msgid "Not running on X11 or Wayland."
+msgstr "Non sur X11 ou Wayland"
+
+#: extension.js:69
+msgid "Missing dependencies: "
+msgstr "Dépendances manquantes : "
+
+#: extension.js:73
+msgid "Ensure to install Tesseract with your language(s)."
+msgstr "Assurez-vous d'installer Tesseract avec vos langues."
+
+#: extension.js:76 prefs.js:73
+msgid "No known Tesseract languages installed."
+msgstr "Aucune langue Tesseract connue installée."
+
+#: extension.js:137
 msgid "TextGrabber"
 msgstr "TextGrabber"
 
-msgid "Text captured and copied to clipboard!"
-msgstr "Texte capturé et copié dans le presse-papiers !"
-
-msgid "Error running the script."
-msgstr "Erreur lors de l'exécution du script."
-
+#: extension.js:137
 msgid "Error: "
 msgstr "Erreur : "
 
-msgid "Show button in top bar"
-msgstr "Afficher le bouton dans la barre supérieure"
-
-msgid "Keyboard shortcut"
-msgstr "Raccourci clavier"
-
-msgid "Text Languages"
-msgstr "Langues du texte"
-
-msgid "Select languages for OCR"
-msgstr "Sélectionnez les langues pour l'OCR"
-
-msgid "Invalid shortcut"
-msgstr "Raccourci invalide"
-
+#: languages.js:106
 msgid "Afrikaans"
 msgstr "Afrikaans"
 
+#: languages.js:107
 msgid "Albanian"
 msgstr "Albanais"
 
+#: languages.js:108
 msgid "Amharic"
 msgstr "Amharique"
 
+#: languages.js:109
 msgid "Arabic"
 msgstr "Arabe"
 
+#: languages.js:110
 msgid "Armenian"
 msgstr "Arménien"
 
+#: languages.js:111
 msgid "Azerbaijani"
 msgstr "Azerbaïdjanais"
 
+#: languages.js:112
 msgid "Basque"
 msgstr "Basque"
 
+#: languages.js:113
 msgid "Belarusian"
 msgstr "Biélorusse"
 
+#: languages.js:114
 msgid "Bengali"
 msgstr "Bengali"
 
+#: languages.js:115
 msgid "Bosnian"
 msgstr "Bosnien"
 
+#: languages.js:116
 msgid "Bulgarian"
 msgstr "Bulgare"
 
+#: languages.js:117
 msgid "Burmese"
 msgstr "Birman"
 
+#: languages.js:118
 msgid "Catalan"
 msgstr "Catalan"
 
+#: languages.js:119
 msgid "Cebuano"
 msgstr "Cebuano"
 
+#: languages.js:120
 msgid "Cherokee"
 msgstr "Cherokee"
 
+#: languages.js:121
 msgid "Chinese (Simplified)"
 msgstr "Chinois (simplifié)"
 
+#: languages.js:122
 msgid "Chinese (Traditional)"
 msgstr "Chinois (traditionnel)"
 
+#: languages.js:123
 msgid "Croatian"
 msgstr "Croate"
 
+#: languages.js:124
 msgid "Czech"
 msgstr "Tchèque"
 
+#: languages.js:125
 msgid "Danish"
 msgstr "Danois"
 
+#: languages.js:126
 msgid "Dutch"
 msgstr "Néerlandais"
 
+#: languages.js:127
 msgid "English"
 msgstr "Anglais"
 
+#: languages.js:128
 msgid "Esperanto"
 msgstr "Espéranto"
 
+#: languages.js:129
 msgid "Estonian"
 msgstr "Estonien"
 
+#: languages.js:130
 msgid "Finnish"
 msgstr "Finnois"
 
+#: languages.js:131
 msgid "French"
 msgstr "Français"
 
+#: languages.js:132
 msgid "Galician"
 msgstr "Galicien"
 
+#: languages.js:133
 msgid "Georgian"
 msgstr "Géorgien"
 
+#: languages.js:134
 msgid "German"
 msgstr "Allemand"
 
+#: languages.js:135
 msgid "Greek"
 msgstr "Grec"
 
+#: languages.js:136
 msgid "Gujarati"
 msgstr "Gujarati"
 
+#: languages.js:137
 msgid "Hebrew"
 msgstr "Hébreu"
 
+#: languages.js:138
 msgid "Hindi"
 msgstr "Hindi"
 
+#: languages.js:139
 msgid "Hungarian"
 msgstr "Hongrois"
 
+#: languages.js:140
 msgid "Icelandic"
 msgstr "Islandais"
 
+#: languages.js:141
 msgid "Indonesian"
 msgstr "Indonésien"
 
+#: languages.js:142
 msgid "Italian"
 msgstr "Italien"
 
+#: languages.js:143
 msgid "Japanese"
 msgstr "Japonais"
 
+#: languages.js:144
 msgid "Kannada"
 msgstr "Kannada"
 
+#: languages.js:145
 msgid "Khmer"
 msgstr "Khmer"
 
+#: languages.js:146
 msgid "Korean"
 msgstr "Coréen"
 
+#: languages.js:147
 msgid "Lao"
 msgstr "Lao"
 
+#: languages.js:148
 msgid "Latvian"
 msgstr "Letton"
 
+#: languages.js:149
 msgid "Lithuanian"
 msgstr "Lituanien"
 
+#: languages.js:150
 msgid "Macedonian"
 msgstr "Macédonien"
 
+#: languages.js:151
 msgid "Malay"
 msgstr "Malais"
 
+#: languages.js:152
 msgid "Malayalam"
 msgstr "Malayalam"
 
+#: languages.js:153
 msgid "Maltese"
 msgstr "Maltais"
 
+#: languages.js:154
 msgid "Marathi"
 msgstr "Marathi"
 
+#: languages.js:155
 msgid "Nepali"
 msgstr "Népalais"
 
+#: languages.js:156
 msgid "Norwegian"
 msgstr "Norvégien"
 
+#: languages.js:157
 msgid "Persian"
 msgstr "Persan"
 
+#: languages.js:158
 msgid "Polish"
 msgstr "Polonais"
 
+#: languages.js:159
 msgid "Portuguese"
 msgstr "Portugais"
 
+#: languages.js:160
 msgid "Punjabi"
 msgstr "Pendjabi"
 
+#: languages.js:161
 msgid "Romanian"
 msgstr "Roumain"
 
+#: languages.js:162
 msgid "Russian"
 msgstr "Russe"
 
+#: languages.js:163
 msgid "Serbian"
 msgstr "Serbe"
 
+#: languages.js:164
 msgid "Sinhala"
 msgstr "Sinhala"
 
+#: languages.js:165
 msgid "Slovak"
 msgstr "Slovaque"
 
+#: languages.js:166
 msgid "Slovenian"
 msgstr "Slovène"
 
+#: languages.js:167
 msgid "Spanish"
 msgstr "Espagnol"
 
+#: languages.js:168
 msgid "Swahili"
 msgstr "Swahili"
 
+#: languages.js:169
 msgid "Swedish"
 msgstr "Suédois"
 
+#: languages.js:170
 msgid "Tamil"
 msgstr "Tamoul"
 
+#: languages.js:171
 msgid "Telugu"
 msgstr "Telugu"
 
+#: languages.js:172
 msgid "Thai"
 msgstr "Thaï"
 
+#: languages.js:173
 msgid "Tibetan"
 msgstr "Tibétain"
 
+#: languages.js:174
 msgid "Turkish"
 msgstr "Turc"
 
+#: languages.js:175
 msgid "Ukrainian"
 msgstr "Ukrainien"
 
+#: languages.js:176
 msgid "Urdu"
 msgstr "Ourdou"
 
+#: languages.js:177
 msgid "Vietnamese"
 msgstr "Vietnamien"
 
+#: languages.js:178
 msgid "Welsh"
 msgstr "Gallois"
 
+#: languages.js:179
 msgid "Yiddish"
 msgstr "Yiddish"
 
-msgid "The required command \"{0}\" is not available. Please install it to use the {1} feature."
-msgstr "La commande requise \"{0}\" n'est pas disponible. Veuillez l'installer pour utiliser la fonctionnalité {1}."
+#: prefs.js:27
+msgid "Show button in top bar"
+msgstr "Afficher le bouton dans la barre supérieure"
 
-msgid "Activation failed: Missing dependencies: {0}"
-msgstr "Échec de l'activation : Dépendances manquantes : {0}"
-
-msgid "Shortcut"
-msgstr "Raccourci"
-
+#: prefs.js:42
 msgid "Toggle shortcut"
 msgstr "Raccourci clavier"
 
+#: prefs.js:43
 msgid "Use Backspace to clear"
 msgstr "Espace arrière pour effacer"
 
-msgid "New accelerator…"
-msgstr "Nouvel accélérateur…"
+#: prefs.js:62
+msgid "Shortcut"
+msgstr "Raccourci"
 
+#: prefs.js:72
+msgid "Text Languages"
+msgstr "Langues du texte"
+
+#: prefs.js:73
+msgid "Select languages for OCR"
+msgstr "Sélectionnez les langues pour l'OCR"
+
+#: prefs.js:102
+msgid "No languages available"
+msgstr "Aucune langue disponible"
+
+#: prefs.js:103
+#, fuzzy
+msgid "Install Tesseract language data to enable OCR."
+msgstr "Installez un modèle de langue Tesseract pour activer l'OCR."
+
+#: prefs.js:111
 msgid "currentLanguage"
 msgstr "fr"
 
-msgid "No known Tesseract languages installed."
-msgstr "Aucune langue Tesseract connue installée."
+#: prefs.js:154 prefs.js:182
+msgid "New accelerator…"
+msgstr "Nouvel accélérateur…"

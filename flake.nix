@@ -92,7 +92,7 @@
           #!/usr/bin/env bash
           # Generate po messages from source files
 
-          xgettext -o po/textgrabber.pot *.js
+          xgettext --from-code=UTF-8 -o po/textgrabber.pot *.js
           for lang in en fr es
           do
             msgmerge -U po/$lang.po po/textgrabber.pot
@@ -205,7 +205,7 @@
             type = "app";
             program = "${show}/bin/show";
           };
-          genmessage = {
+          genmessages = {
             type = "app";
             program = "${genmessages}/bin/genmessages";
           };

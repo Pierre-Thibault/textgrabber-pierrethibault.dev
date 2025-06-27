@@ -98,3 +98,83 @@ function getTesseractInstalledLanguages() {
   }
   return [];
 }
+
+function _() {
+  // Static invocation to tell gettext that our strings exist
+  // Never called
+
+  _('Afrikaans');
+  _('Albanian');
+  _('Amharic');
+  _('Arabic');
+  _('Armenian');
+  _('Azerbaijani');
+  _('Basque');
+  _('Belarusian');
+  _('Bengali');
+  _('Bosnian');
+  _('Bulgarian');
+  _('Burmese');
+  _('Catalan');
+  _('Cebuano');
+  _('Cherokee');
+  _('Chinese (Simplified)');
+  _('Chinese (Traditional)');
+  _('Croatian');
+  _('Czech');
+  _('Danish');
+  _('Dutch');
+  _('English');
+  _('Esperanto');
+  _('Estonian');
+  _('Finnish');
+  _('French');
+  _('Galician');
+  _('Georgian');
+  _('German');
+  _('Greek');
+  _('Gujarati');
+  _('Hebrew');
+  _('Hindi');
+  _('Hungarian');
+  _('Icelandic');
+  _('Indonesian');
+  _('Italian');
+  _('Japanese');
+  _('Kannada');
+  _('Khmer');
+  _('Korean');
+  _('Lao');
+  _('Latvian');
+  _('Lithuanian');
+  _('Macedonian');
+  _('Malay');
+  _('Malayalam');
+  _('Maltese');
+  _('Marathi');
+  _('Nepali');
+  _('Norwegian');
+  _('Persian');
+  _('Polish');
+  _('Portuguese');
+  _('Punjabi');
+  _('Romanian');
+  _('Russian');
+  _('Serbian');
+  _('Sinhala');
+  _('Slovak');
+  _('Slovenian');
+  _('Spanish');
+  _('Swahili');
+  _('Swedish');
+  _('Tamil');
+  _('Telugu');
+  _('Thai');
+  _('Tibetan');
+  _('Turkish');
+  _('Ukrainian');
+  _('Urdu');
+  _('Vietnamese');
+  _('Welsh');
+  _('Yiddish');
+}
