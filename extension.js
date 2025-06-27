@@ -1,5 +1,4 @@
 import St from 'gi://St';
-import Gio from 'gi://Gio';
 import GLib from 'gi://GLib';
 import Meta from 'gi://Meta';
 import Shell from 'gi://Shell';
@@ -18,23 +17,22 @@ export default class extends Extension {
   }
 
   enable() {
-    const dependencies = {
-      tesseract: 'tesseract',
-      gnomeScreenshot: 'gnome-screenshot',
-      clipboard: GLib.getenv('XDG_SESSION_TYPE') === 'wayland' ? 'wl-copy' : 'xsel'
-    };
+    // Validate dependencies
+    const dependencies = [
+      'tesseract',
+      'gnome-screenshot',
+      GLib.getenv('XDG_SESSION_TYPE') === 'wayland' ? 'wl-copy' : 'xsel'
+    ];
 
     const missingDependencies = [];
 
-    for (let [name, command] of Object.entries(dependencies)) {
+    for (const command of dependencies) {
       if (!GLib.find_program_in_path(command)) {
         missingDependencies.push(command);
-        Main.notifyError(_('TextGrabber'), _(`The required command "${command}" is not available. Please install it to use the ${name} feature.`));
       }
     }
 
     if (missingDependencies.length !== 0) {
-      // Lancer une exception pour indiquer l'échec de l'activation
       throw new Error(_('Activation failed: Missing dependencies: ') + missingDependencies.join(', '));
     }
 
