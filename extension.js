@@ -7,7 +7,8 @@ import * as PanelMenu from 'resource:///org/gnome/shell/ui/panelMenu.js';
 import * as Main from 'resource:///org/gnome/shell/ui/main.js';
 import { Extension, gettext as _ } from 'resource:///org/gnome/shell/extensions/extension.js';
 
-import { KEYS } from "./const.js"
+import { schemaKeys } from "./const.js";
+import { getAvailableLanguages } from "./languages.js";
 
 export default class extends Extension {
   constructor(metadata) {
@@ -17,39 +18,68 @@ export default class extends Extension {
   }
 
   enable() {
-    // Validate dependencies
+    this._ensureDependencies();
+
+    // Load settings
+    this._settings = this.getSettings();
+
+    // Manage button visibility
+    let showButton = this._settings.get_boolean(schemaKeys.showButton);
+    this._updateButton(showButton);
+
+    // Listen for changes to button visibility
+    this._settings.connect(`changed::${schemaKeys.showButton}`, () => {
+      this._updateButton(this._settings.get_boolean(schemaKeys.showButton));
+    });
+
+    // Set up keyboard shortcut
+    this._bindShortcut();
+  }
+
+  _ensureDependencies() {
+    // Throw an error if something is missging  
+
+    const errorMessages = [];
+
+    // Check dependencies
     const dependencies = [
+      'bash',
       'tesseract',
       'gnome-screenshot',
-      GLib.getenv('XDG_SESSION_TYPE') === 'wayland' ? 'wl-copy' : 'xsel'
     ];
-
+    switch (GLib.getenv('XDG_SESSION_TYPE')) {
+      case "wayland":
+        dependencies.push("wl-copy");
+        break;
+      case "x11":
+        dependencies.push("xsel");
+        break;
+      default:
+        errorMessages.push(_("Not running on X11 or Wayland."));
+    }
     const missingDependencies = [];
-
     for (const command of dependencies) {
       if (!GLib.find_program_in_path(command)) {
         missingDependencies.push(command);
       }
     }
 
+    // Build error message
     if (missingDependencies.length !== 0) {
-      throw new Error(_('Activation failed: Missing dependencies: ') + missingDependencies.join(', '));
+      errorMessages.push(_('Missing dependencies: ') + missingDependencies.join(', ') + '.');
+      throw new Error();
+    }
+    if (missingDependencies.includes("tesseract")) {
+      errorMessages.push(_('Ensure to install Tesseract with your language(s).'));
+    }
+    else if (getAvailableLanguages().length === 0) {
+      errorMessages.push(_('No known Tesseract languages installed.'));
     }
 
-    // Load settings
-    this._settings = this.getSettings();
-
-    // Manage button visibility
-    let showButton = this._settings.get_boolean(KEYS.show_button);
-    this._updateButton(showButton);
-
-    // Listen for changes to button visibility
-    this._settings.connect(`changed::${KEYS.show_button}`, () => {
-      this._updateButton(this._settings.get_boolean(KEYS.show_button));
-    });
-
-    // Set up keyboard shortcut
-    this._bindShortcut();
+    // Throw if we found an error
+    if (errorMessages.length) {
+      throw new Error(errorMessages.join(' '));
+    }
   }
 
   _updateButton(show) {
@@ -77,7 +107,7 @@ export default class extends Extension {
   _bindShortcut() {
     // Add shortcut from settings (default: <Super>t from schema)
     Main.wm.addKeybinding(
-      KEYS.textgrabber_shortcut,
+      schemaKeys.textgrabberShortcut,
       this._settings,
       Meta.KeyBindingFlags.IGNORE_AUTOREPEAT,
       Shell.ActionMode.NORMAL | Shell.ActionMode.OVERVIEW,
@@ -85,10 +115,10 @@ export default class extends Extension {
     );
 
     // Listen for shortcut changes
-    this._settings.connect(`changed::${KEYS.textgrabber_shortcut}`, () => {
-      Main.wm.removeKeybinding(KEYS.textgrabber_shortcut);
+    this._settings.connect(`changed::${schemaKeys.textgrabberShortcut}`, () => {
+      Main.wm.removeKeybinding(schemaKeys.textgrabberShortcut);
       Main.wm.addKeybinding(
-        KEYS.textgrabber_shortcut,
+        schemaKeys.textgrabberShortcut,
         this._settings,
         Meta.KeyBindingFlags.NONE,
         Shell.ActionMode.ALL,
@@ -99,7 +129,7 @@ export default class extends Extension {
 
   _grabText() {
     try {
-      let languages = this._settings.get_strv(KEYS.tesseract_languages);
+      let languages = this._settings.get_strv(schemaKeys.tesseractLanguages);
       let langString = languages.length > 0 ? languages.join('+') : 'eng';
       let scriptPath = this.path + '/textgrabber.sh';
       GLib.spawn_command_line_async(`${scriptPath} ${langString}`);
@@ -113,7 +143,7 @@ export default class extends Extension {
       this._button.destroy();
       this._button = null;
     }
-    Main.wm.removeKeybinding(KEYS.textgrabber_shortcut);
+    Main.wm.removeKeybinding(schemaKeys.textgrabberShortcut);
     this._settings = null;
   }
 }

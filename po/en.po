@@ -280,3 +280,6 @@ msgstr "New accelerator…"
 
 msgid "currentLanguage"
 msgstr "en"
+
+msgid "No known Tesseract languages installed."
+msgstr "No known Tesseract languages installed."

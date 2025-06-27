@@ -1,16 +1,22 @@
 #!/usr/bin/env bash
-# Dependencies: tesseract-ocr gnome-screenshot wl-clipboard (for Wayland), xsel (for X11)
+# Dependencies: tesseract gnome-screenshot wl-copy (for Wayland only), xsel (for X11 only) bash
 
-LANGUAGES=${1:-"eng"} # Utilise l'argument ou 'eng' par défaut
+beep() {
+  echo -ne '\007'  # Beep
+}
+
+trap 'beep' ERR  # Beep if there is an error or an exit 1
+set -e  # Stop the script if there is an error
+
+LANGUAGES=${1:-"eng"}  # eng as default argument
 SCR_IMG=$(mktemp)
-trap 'rm $SCR_IMG*' EXIT
+trap 'rm $SCR_IMG*' EXIT  # cleanup
 
 gnome-screenshot -a -f "$SCR_IMG.png"
 
 tesseract "$SCR_IMG.png" "$SCR_IMG" -l "$LANGUAGES" &> /dev/null
 
 if [ ! -s "$SCR_IMG.txt" ]; then  # Unable to read text
-  echo -ne '\007'  # Beep
   exit 1
 fi
 

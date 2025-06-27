@@ -2,91 +2,12 @@ import Adw from "gi://Adw";
 import Gdk from 'gi://Gdk';
 import Gtk from "gi://Gtk";
 import Gio from "gi://Gio";
-import GLib from "gi://GLib"
 import GObject from 'gi://GObject';
 
 import { ExtensionPreferences, gettext as _ } from 'resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js';
 
-import { KEYS } from "./const.js"
-import { Utf8ArrayToStr } from "./Utf8ArrayToStr.js"
-
-// List of all possible Tesseract languages with translatable names
-const allTesseractLanguages = [
-  { name: 'Afrikaans', code: 'afr' },
-  { name: 'Albanian', code: 'sqi' },
-  { name: 'Amharic', code: 'amh' },
-  { name: 'Arabic', code: 'ara' },
-  { name: 'Armenian', code: 'hye' },
-  { name: 'Azerbaijani', code: 'aze' },
-  { name: 'Basque', code: 'eus' },
-  { name: 'Belarusian', code: 'bel' },
-  { name: 'Bengali', code: 'ben' },
-  { name: 'Bosnian', code: 'bos' },
-  { name: 'Bulgarian', code: 'bul' },
-  { name: 'Burmese', code: 'mya' },
-  { name: 'Catalan', code: 'cat' },
-  { name: 'Cebuano', code: 'ceb' },
-  { name: 'Cherokee', code: 'chr' },
-  { name: 'Chinese (Simplified)', code: 'chi_sim' },
-  { name: 'Chinese (Traditional)', code: 'chi_tra' },
-  { name: 'Croatian', code: 'hrv' },
-  { name: 'Czech', code: 'ces' },
-  { name: 'Danish', code: 'dan' },
-  { name: 'Dutch', code: 'nld' },
-  { name: 'English', code: 'eng' },
-  { name: 'Esperanto', code: 'epo' },
-  { name: 'Estonian', code: 'est' },
-  { name: 'Finnish', code: 'fin' },
-  { name: 'French', code: 'fra' },
-  { name: 'Galician', code: 'glg' },
-  { name: 'Georgian', code: 'kat' },
-  { name: 'German', code: 'deu' },
-  { name: 'Greek', code: 'ell' },
-  { name: 'Gujarati', code: 'guj' },
-  { name: 'Hebrew', code: 'heb' },
-  { name: 'Hindi', code: 'hin' },
-  { name: 'Hungarian', code: 'hun' },
-  { name: 'Icelandic', code: 'isl' },
-  { name: 'Indonesian', code: 'ind' },
-  { name: 'Italian', code: 'ita' },
-  { name: 'Japanese', code: 'jpn' },
-  { name: 'Kannada', code: 'kan' },
-  { name: 'Khmer', code: 'khm' },
-  { name: 'Korean', code: 'kor' },
-  { name: 'Lao', code: 'lao' },
-  { name: 'Latvian', code: 'lav' },
-  { name: 'Lithuanian', code: 'lit' },
-  { name: 'Macedonian', code: 'mkd' },
-  { name: 'Malay', code: 'msa' },
-  { name: 'Malayalam', code: 'mal' },
-  { name: 'Maltese', code: 'mlt' },
-  { name: 'Marathi', code: 'mar' },
-  { name: 'Nepali', code: 'nep' },
-  { name: 'Norwegian', code: 'nor' },
-  { name: 'Persian', code: 'fas' },
-  { name: 'Polish', code: 'pol' },
-  { name: 'Portuguese', code: 'por' },
-  { name: 'Punjabi', code: 'pan' },
-  { name: 'Romanian', code: 'ron' },
-  { name: 'Russian', code: 'rus' },
-  { name: 'Serbian', code: 'srp' },
-  { name: 'Sinhala', code: 'sin' },
-  { name: 'Slovak', code: 'slk' },
-  { name: 'Slovenian', code: 'slv' },
-  { name: 'Spanish', code: 'spa' },
-  { name: 'Swahili', code: 'swa' },
-  { name: 'Swedish', code: 'swe' },
-  { name: 'Tamil', code: 'tam' },
-  { name: 'Telugu', code: 'tel' },
-  { name: 'Thai', code: 'tha' },
-  { name: 'Tibetan', code: 'bod' },
-  { name: 'Turkish', code: 'tur' },
-  { name: 'Ukrainian', code: 'ukr' },
-  { name: 'Urdu', code: 'urd' },
-  { name: 'Vietnamese', code: 'vie' },
-  { name: 'Welsh', code: 'cym' },
-  { name: 'Yiddish', code: 'yid' }
-];
+import { schemaKeys } from "./const.js";
+import { getAvailableLanguages } from "./languages.js";
 
 const genParam = (type, name, ...dflt) => GObject.ParamSpec[type](name, name, name, GObject.ParamFlags.READWRITE, ...dflt);
 
@@ -94,21 +15,6 @@ export default class extends ExtensionPreferences {
 
   fillPreferencesWindow(window) {
     const settings = this.getSettings();
-
-    // Get installed Tesseract languages
-    let installedLanguages = [];
-    try {
-      let [success, stdout, _stderr] = GLib.spawn_command_line_sync('tesseract --list-langs');
-      if (success) {
-        let langs = Utf8ArrayToStr(stdout).split('\n').slice(1).filter(lang => lang.trim() !== '');
-        installedLanguages = langs;
-      }
-    } catch (e) {
-      logError(e, 'Failed to fetch Tesseract languages');
-    }
-
-    // Filter available languages to only those installed
-    const tesseractLanguages = allTesseractLanguages.filter(lang => installedLanguages.includes(lang.code));
 
     const page = new Adw.PreferencesPage();
     window.add(page);
@@ -121,19 +27,18 @@ export default class extends ExtensionPreferences {
       title: _('Show button in top bar')
     });
     const showButtonSwitch = new Gtk.Switch({
-      active: settings.get_boolean(KEYS.show_button),
+      active: settings.get_boolean(schemaKeys.showButton),
       halign: Gtk.Align.END,
       valign: Gtk.Align.CENTER
     });
-    settings.bind(KEYS.show_button, showButtonSwitch, 'active', Gio.SettingsBindFlags.DEFAULT);
+    settings.bind(schemaKeys.showButton, showButtonSwitch, 'active', Gio.SettingsBindFlags.DEFAULT);
     showButtonRow.add_suffix(showButtonSwitch);
     mainGroup.add(showButtonRow);
-
 
     // Shortcut group (mostly from https://github.com/eonpatapon/gnome-shell-extension-caffeine)
     let shortcutSettingWidget = new ShortcutSettingWidget(
       settings,
-      KEYS.textgrabber_shortcut,
+      schemaKeys.textgrabberShortcut,
       _('Toggle shortcut'),
       _('Use Backspace to clear')
     );
@@ -150,7 +55,7 @@ export default class extends ExtensionPreferences {
       deleteShortcutButton.visible = shortcutSettingWidget.isAcceleratorSet();
     }
     updateDeleteShortcutButton();
-    settings.connect(`changed::${KEYS.textgrabber_shortcut}`, updateDeleteShortcutButton);
+    settings.connect(`changed::${schemaKeys.textgrabberShortcut}`, updateDeleteShortcutButton);
 
     // Add elements
     let shortcutGroup = new Adw.PreferencesGroup({
@@ -160,23 +65,25 @@ export default class extends ExtensionPreferences {
     shortcutGroup.add(shortcutSettingWidget);
     mainGroup.add(shortcutGroup);
 
+    const availableLanguages = getAvailableLanguages();
+
     // Tesseract languages with checkboxes
     const languagesGroup = new Adw.PreferencesGroup({
       title: _('Text Languages'),
-      description: installedLanguages.length > 0 ? _('Select languages for OCR') : _('No Tesseract languages installed.')
+      description: availableLanguages.length ? _('Select languages for OCR') : _('No known Tesseract languages installed.')
     });
     page.add(languagesGroup);
 
-    if (installedLanguages.length > 0) {
-      const currentLanguages = settings.get_strv(KEYS.tesseract_languages);
-      this._sortLanguages(tesseractLanguages);
-      tesseractLanguages.forEach(lang => {
+    if (availableLanguages.length) {
+      const currentLanguages = settings.get_strv(schemaKeys.tesseractLanguages);
+      this._sortLanguages(availableLanguages);
+      availableLanguages.forEach(lang => {
         const checkButton = new Gtk.CheckButton({
           label: _(lang.name), // Localize the language name
           active: currentLanguages.includes(lang.code)
         });
         checkButton.connect('toggled', () => {
-          let updatedLanguages = settings.get_strv(KEYS.tesseract_languages);
+          let updatedLanguages = settings.get_strv(schemaKeys.tesseractLanguages);
           if (checkButton.active) {
             if (!updatedLanguages.includes(lang.code)) {
               updatedLanguages.push(lang.code);
@@ -184,7 +91,7 @@ export default class extends ExtensionPreferences {
           } else {
             updatedLanguages = updatedLanguages.filter(l => l !== lang.code);
           }
-          settings.set_strv(KEYS.tesseract_languages, updatedLanguages);
+          settings.set_strv(schemaKeys.tesseractLanguages, updatedLanguages);
         });
         const row = new Adw.ActionRow();
         row.add_prefix(checkButton);

@@ -88,6 +88,35 @@
           "cym"
           "yid"
         ];
+        genmessages = pkgs.writeScriptBin "genmessages" ''
+          #!/usr/bin/env bash
+          # Generate po messages from source files
+
+          xgettext -o po/textgrabber.pot *.js
+          for lang in en fr es
+          do
+            msgmerge -U po/$lang.po po/textgrabber.pot
+            msgfmt --check po/$lang.po
+          done
+        '';
+
+        show = pkgs.writeScriptBin "show" ''
+          #!/usr/bin/env bash
+          # Show the commands available in this flake
+          # 
+          system=$(uname -s | tr A-Z a-z)
+          arch=$(uname -m)
+
+          # Use nix flake show to list apps
+          ${pkgs.nix}/bin/nix flake show --json 2> /dev/null | ${pkgs.jq}/bin/jq -r '
+            .apps | 
+            to_entries[] | 
+            .key as $system | 
+            .value | 
+            to_entries[] | 
+            "\($system): \(.key)"
+            ' | grep "$arch-$system"
+        '';
       in
       {
         packages.default = pkgs.stdenv.mkDerivation {
@@ -97,6 +126,7 @@
 
           # Dependencies needed at runtime
           buildInputs = with pkgs; [
+            bash
             glib
             gettext
             (tesseract4.override { enableLanguages = tesseractLanguages; })
@@ -109,6 +139,7 @@
           nativeBuildInputs = with pkgs; [
             glib
             gettext
+            gnused
           ];
 
           buildPhase = ''
@@ -120,6 +151,8 @@
             msgfmt po/es.po -o locale/es/LC_MESSAGES/textgrabber.mo
             chmod +x textgrabber.sh
           '';
+
+          dontPatchShebangs = true; # Prevents Nix from modifying shebang lines
 
           installPhase =
             let
@@ -158,10 +191,24 @@
             gnome-screenshot
             wl-clipboard
             xsel
+
+            # For this flake itself
+            jq
           ];
           shellHook = ''
             echo "Installed Tesseract languages: $(tesseract --list-langs)"
+            echo "Use nix run .#show to see the commands available in this flake."
           '';
+        };
+        apps = {
+          show = {
+            type = "app";
+            program = "${show}/bin/show";
+          };
+          genmessage = {
+            type = "app";
+            program = "${genmessages}/bin/genmessages";
+          };
         };
       }
     );
