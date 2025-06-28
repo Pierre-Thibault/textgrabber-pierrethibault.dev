@@ -14,6 +14,8 @@ export default class extends Extension {
   constructor(metadata) {
     super(metadata);
     this._button = null;
+    this._buttonSignalHandler = null;
+    this._keyboardShortcutChangeSignalHandler = null;
     this._settings = null;
   }
 
@@ -28,7 +30,7 @@ export default class extends Extension {
     this._updateButton(showButton);
 
     // Listen for changes to button visibility
-    this._settings.connect(`changed::${schemaKeys.showButton}`, () => {
+    this._buttonSignalHandler = this._settings.connect(`changed::${schemaKeys.showButton}`, () => {
       this._updateButton(this._settings.get_boolean(schemaKeys.showButton));
     });
 
@@ -114,7 +116,7 @@ export default class extends Extension {
     );
 
     // Listen for shortcut changes
-    this._settings.connect(`changed::${schemaKeys.textgrabberShortcut}`, () => {
+    this._keyboardShortcutChangeSignalHandler = this._settings.connect(`changed::${schemaKeys.textgrabberShortcut}`, () => {
       Main.wm.removeKeybinding(schemaKeys.textgrabberShortcut);
       Main.wm.addKeybinding(
         schemaKeys.textgrabberShortcut,
@@ -138,9 +140,15 @@ export default class extends Extension {
   }
 
   disable() {
-    if (this._button) {
-      this._button.destroy();
-      this._button = null;
+    this._button?.destroy();
+    this._button = null;
+    if (this._buttonSignalHandler) {
+      this._settings.disconnect(this._buttonSignalHandler);
+      this._buttonSignalHandler = null;
+    }
+    if (this._keyboardShortcutChangeSignalHandler) {
+      this._settings.disconnect(this._keyboardShortcutChangeSignalHandler);
+      this._keyboardShortcutChangeSignalHandler = null;
     }
     Main.wm.removeKeybinding(schemaKeys.textgrabberShortcut);
     this._settings = null;
