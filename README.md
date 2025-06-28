@@ -5,7 +5,8 @@
 [![GitHub release (latest by date)](https://img.shields.io/github/v/tag/Pierre-Thibault/textgrabber-pierrethibault.dev)](https://github.com/Pierre-Thibault/textgrabber-pierrethibault.dev/releases/latest)
 
  
-![image](https://github.com/user-attachments/assets/34ff2e03-5476-453a-a851-51d53d71ae48)
+![image](https://github.com/user-attachments/assets/4506a4b4-bd4f-4406-a0ed-6a74ae1814fc)
+
 
 A GNOME Extension to grab text on the screen using OCR.
 
