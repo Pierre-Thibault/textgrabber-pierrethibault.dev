@@ -45,6 +45,10 @@ Quite often, there is text on the screen that we cannot directly select. This co
 
 By default, the icon will appear on the Gnome Top Panel. Just click the icon, click on the screen and hold the mouse button to create a marquee around the text to grab. If everything works fine, the text is now available in the clipboard. Otherwise, you can also assign a keyboard shortcut if you prefer. The rest is self-explanatory.
 
+In the Top Panel: 
+
+![image](https://github.com/user-attachments/assets/fe33fb6b-9431-48c8-88dd-32b73ba7eb4c)
+
 ## Author
 
 Pierre Thibault 2025-06-28
