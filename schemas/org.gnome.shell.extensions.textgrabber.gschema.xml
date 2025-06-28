@@ -12,7 +12,7 @@
       <description>Shortcut to trigger the TextGrabber action.</description>
     </key>
     <key name="tesseract-languages" type="as">
-      <default>['eng']</default>
+      <default>[]</default>
       <summary>Tesseract languages</summary>
       <description>Languages used by Tesseract for OCR.</description>
     </key>

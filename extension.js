@@ -67,7 +67,6 @@ export default class extends Extension {
     // Build error message
     if (missingDependencies.length !== 0) {
       errorMessages.push(_('Missing dependencies: ') + missingDependencies.join(', ') + '.');
-      throw new Error();
     }
     if (missingDependencies.includes("tesseract")) {
       errorMessages.push(_('Ensure to install Tesseract with your language(s).'));
