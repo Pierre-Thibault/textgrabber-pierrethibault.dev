@@ -169,9 +169,8 @@
                  metadata.json \
                  *.js \
                  textgrabber.sh \
+                 schemas \
                  "${output_dir}/"
-              mkdir -p "${output_dir}/schemas"
-              cp schemas/gschemas.compiled "${output_dir}/schemas"
             '';
 
           meta = with pkgs.lib; {
