@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: textgrabber\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-06-27 18:10-0400\n"
+"POT-Creation-Date: 2025-06-29 01:52-0400\n"
 "PO-Revision-Date: 2025-06-19 21:00-0400\n"
 "Last-Translator: Pierre Thibault <pierre.thibault@pierrethibault.dev>\n"
 "Language-Team: Spanish <es@li.org>\n"
@@ -11,324 +11,316 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: extension.js:58
+#: extension.js:61
 msgid "Not running on X11 or Wayland."
 msgstr "No X11 o Wayland"
 
-#: extension.js:69
+#: extension.js:72
 #, fuzzy
 msgid "Missing dependencies: "
 msgstr "Dependencias faltantes: "
 
-#: extension.js:73
+#: extension.js:75
 msgid "Ensure to install Tesseract with your language(s)."
 msgstr "Asegúrese de instalar Tesseract con su idioma(s)."
 
-#: extension.js:76 prefs.js:73
+#: extension.js:78 prefs.js:73
 msgid "No known Tesseract languages installed."
 msgstr "No se han instalado idiomas Tesseract conocidos."
 
-#: extension.js:137
-msgid "TextGrabber"
-msgstr "TextGrabber"
-
-#: extension.js:137
-msgid "Error: "
-msgstr "Error: "
-
-#: languages.js:106
+#: languages.js:104
 msgid "Afrikaans"
 msgstr "Afrikáans"
 
-#: languages.js:107
+#: languages.js:105
 msgid "Albanian"
 msgstr "Albanés"
 
-#: languages.js:108
+#: languages.js:106
 msgid "Amharic"
 msgstr "Amárico"
 
-#: languages.js:109
+#: languages.js:107
 msgid "Arabic"
 msgstr "Árabe"
 
-#: languages.js:110
+#: languages.js:108
 msgid "Armenian"
 msgstr "Armenio"
 
-#: languages.js:111
+#: languages.js:109
 msgid "Azerbaijani"
 msgstr "Azerbaiyano"
 
-#: languages.js:112
+#: languages.js:110
 msgid "Basque"
 msgstr "Vasco"
 
-#: languages.js:113
+#: languages.js:111
 msgid "Belarusian"
 msgstr "Bielorruso"
 
-#: languages.js:114
+#: languages.js:112
 msgid "Bengali"
 msgstr "Bengalí"
 
-#: languages.js:115
+#: languages.js:113
 msgid "Bosnian"
 msgstr "Bosnio"
 
-#: languages.js:116
+#: languages.js:114
 msgid "Bulgarian"
 msgstr "Búlgaro"
 
-#: languages.js:117
+#: languages.js:115
 msgid "Burmese"
 msgstr "Birmano"
 
-#: languages.js:118
+#: languages.js:116
 msgid "Catalan"
 msgstr "Catalán"
 
-#: languages.js:119
+#: languages.js:117
 msgid "Cebuano"
 msgstr "Cebuano"
 
-#: languages.js:120
+#: languages.js:118
 msgid "Cherokee"
 msgstr "Cherokee"
 
-#: languages.js:121
+#: languages.js:119
 msgid "Chinese (Simplified)"
 msgstr "Chino (simplificado)"
 
-#: languages.js:122
+#: languages.js:120
 msgid "Chinese (Traditional)"
 msgstr "Chino (tradicional)"
 
-#: languages.js:123
+#: languages.js:121
 msgid "Croatian"
 msgstr "Croata"
 
-#: languages.js:124
+#: languages.js:122
 msgid "Czech"
 msgstr "Checo"
 
-#: languages.js:125
+#: languages.js:123
 msgid "Danish"
 msgstr "Danés"
 
-#: languages.js:126
+#: languages.js:124
 msgid "Dutch"
 msgstr "Neerlandés"
 
-#: languages.js:127
+#: languages.js:125
 msgid "English"
 msgstr "Inglés"
 
-#: languages.js:128
+#: languages.js:126
 msgid "Esperanto"
 msgstr "Esperanto"
 
-#: languages.js:129
+#: languages.js:127
 msgid "Estonian"
 msgstr "Estonio"
 
-#: languages.js:130
+#: languages.js:128
 msgid "Finnish"
 msgstr "Finés"
 
-#: languages.js:131
+#: languages.js:129
 msgid "French"
 msgstr "Francés"
 
-#: languages.js:132
+#: languages.js:130
 msgid "Galician"
 msgstr "Gallego"
 
-#: languages.js:133
+#: languages.js:131
 msgid "Georgian"
 msgstr "Georgiano"
 
-#: languages.js:134
+#: languages.js:132
 msgid "German"
 msgstr "Alemán"
 
-#: languages.js:135
+#: languages.js:133
 msgid "Greek"
 msgstr "Griego"
 
-#: languages.js:136
+#: languages.js:134
 msgid "Gujarati"
 msgstr "Guyaratí"
 
-#: languages.js:137
+#: languages.js:135
 msgid "Hebrew"
 msgstr "Hebreo"
 
-#: languages.js:138
+#: languages.js:136
 msgid "Hindi"
 msgstr "Hindi"
 
-#: languages.js:139
+#: languages.js:137
 msgid "Hungarian"
 msgstr "Húngaro"
 
-#: languages.js:140
+#: languages.js:138
 msgid "Icelandic"
 msgstr "Islandés"
 
-#: languages.js:141
+#: languages.js:139
 msgid "Indonesian"
 msgstr "Indonesio"
 
-#: languages.js:142
+#: languages.js:140
 msgid "Italian"
 msgstr "Italiano"
 
-#: languages.js:143
+#: languages.js:141
 msgid "Japanese"
 msgstr "Japonés"
 
-#: languages.js:144
+#: languages.js:142
 msgid "Kannada"
 msgstr "Canarés"
 
-#: languages.js:145
+#: languages.js:143
 msgid "Khmer"
 msgstr "Jemer"
 
-#: languages.js:146
+#: languages.js:144
 msgid "Korean"
 msgstr "Coreano"
 
-#: languages.js:147
+#: languages.js:145
 msgid "Lao"
 msgstr "Lao"
 
-#: languages.js:148
+#: languages.js:146
 msgid "Latvian"
 msgstr "Letón"
 
-#: languages.js:149
+#: languages.js:147
 msgid "Lithuanian"
 msgstr "Lituano"
 
-#: languages.js:150
+#: languages.js:148
 msgid "Macedonian"
 msgstr "Macedonio"
 
-#: languages.js:151
+#: languages.js:149
 msgid "Malay"
 msgstr "Malayo"
 
-#: languages.js:152
+#: languages.js:150
 msgid "Malayalam"
 msgstr "Malayalam"
 
-#: languages.js:153
+#: languages.js:151
 msgid "Maltese"
 msgstr "Maltés"
 
-#: languages.js:154
+#: languages.js:152
 msgid "Marathi"
 msgstr "Maratí"
 
-#: languages.js:155
+#: languages.js:153
 msgid "Nepali"
 msgstr "Nepalí"
 
-#: languages.js:156
+#: languages.js:154
 msgid "Norwegian"
 msgstr "Noruego"
 
-#: languages.js:157
+#: languages.js:155
 msgid "Persian"
 msgstr "Persa"
 
-#: languages.js:158
+#: languages.js:156
 msgid "Polish"
 msgstr "Polaco"
 
-#: languages.js:159
+#: languages.js:157
 msgid "Portuguese"
 msgstr "Portugués"
 
-#: languages.js:160
+#: languages.js:158
 msgid "Punjabi"
 msgstr "Punyabí"
 
-#: languages.js:161
+#: languages.js:159
 msgid "Romanian"
 msgstr "Rumano"
 
-#: languages.js:162
+#: languages.js:160
 msgid "Russian"
 msgstr "Ruso"
 
-#: languages.js:163
+#: languages.js:161
 msgid "Serbian"
 msgstr "Serbio"
 
-#: languages.js:164
+#: languages.js:162
 msgid "Sinhala"
 msgstr "Cingalés"
 
-#: languages.js:165
+#: languages.js:163
 msgid "Slovak"
 msgstr "Eslovaco"
 
-#: languages.js:166
+#: languages.js:164
 msgid "Slovenian"
 msgstr "Esloveno"
 
-#: languages.js:167
+#: languages.js:165
 msgid "Spanish"
 msgstr "Español"
 
-#: languages.js:168
+#: languages.js:166
 msgid "Swahili"
 msgstr "Suajili"
 
-#: languages.js:169
+#: languages.js:167
 msgid "Swedish"
 msgstr "Sueco"
 
-#: languages.js:170
+#: languages.js:168
 msgid "Tamil"
 msgstr "Tamil"
 
-#: languages.js:171
+#: languages.js:169
 msgid "Telugu"
 msgstr "Telugu"
 
-#: languages.js:172
+#: languages.js:170
 msgid "Thai"
 msgstr "Tailandés"
 
-#: languages.js:173
+#: languages.js:171
 msgid "Tibetan"
 msgstr "Tibetano"
 
-#: languages.js:174
+#: languages.js:172
 msgid "Turkish"
 msgstr "Turco"
 
-#: languages.js:175
+#: languages.js:173
 msgid "Ukrainian"
 msgstr "Ucraniano"
 
-#: languages.js:176
+#: languages.js:174
 msgid "Urdu"
 msgstr "Urdu"
 
-#: languages.js:177
+#: languages.js:175
 msgid "Vietnamese"
 msgstr "Vietnamita"
 
-#: languages.js:178
+#: languages.js:176
 msgid "Welsh"
 msgstr "Galés"
 
-#: languages.js:179
+#: languages.js:177
 msgid "Yiddish"
 msgstr "Yidis"
 
@@ -372,3 +364,15 @@ msgstr "es"
 #: prefs.js:154 prefs.js:182
 msgid "New accelerator…"
 msgstr "Nuevo acelerador…"
+
+#: screenocr.js:143
+msgid "Text copied to the clipboard!"
+msgstr "Texto copiado al portapapeles!"
+
+#: screenocr.js:143
+msgid "OCR failed."
+msgstr "OCR falló."
+
+#: screenocr.js:148
+msgid "An error occurred during the OCR process."
+msgstr "Se ha producido un error durante el proceso de OCR."

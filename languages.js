@@ -1,7 +1,5 @@
 import GLib from "gi://GLib";
 
-import { Utf8ArrayToStr } from "./Utf8ArrayToStr.js";
-
 // List of all possible Tesseract languages with translatable names (known at this time)
 const allTesseractLanguages = [
   { name: 'Afrikaans', code: 'afr' },
@@ -91,7 +89,7 @@ function getTesseractInstalledLanguages() {
   try {
     let [success, stdout, _stderr] = GLib.spawn_command_line_sync('tesseract --list-langs');
     if (success) {
-      return Utf8ArrayToStr(stdout).split('\n').slice(1).filter(lang => lang.trim() !== '');
+      return new TextDecoder().decode(stdout).split('\n').slice(1).filter(lang => lang.trim() !== '');
     }
   } catch (e) {
     logError(e, 'Failed to fetch Tesseract languages');

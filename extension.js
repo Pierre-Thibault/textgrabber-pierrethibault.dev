@@ -9,6 +9,7 @@ import { Extension, gettext as _ } from 'resource:///org/gnome/shell/extensions/
 
 import { schemaKeys } from "./const.js";
 import { getAvailableLanguages } from "./languages.js";
+import { ScreenOCR } from "./screenocr.js";
 
 export default class extends Extension {
   constructor(metadata) {
@@ -129,14 +130,9 @@ export default class extends Extension {
   }
 
   _grabText() {
-    try {
-      let languages = this._settings.get_strv(schemaKeys.tesseractLanguages);
-      let langString = languages.length > 0 ? languages.join('+') : 'eng';
-      let scriptPath = this.path + '/textgrabber.sh';
-      GLib.spawn_command_line_async(`${scriptPath} ${langString}`);
-    } catch (e) {
-      Main.notifyError(_('TextGrabber'), _('Error: ') + e.message);
-    }
+    let languages = this._settings.get_strv(schemaKeys.tesseractLanguages);
+    let langString = languages.join('+');
+    new ScreenOCR().grabText(langString).catch(_ => { });
   }
 
   disable() {

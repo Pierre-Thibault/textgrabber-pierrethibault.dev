@@ -149,7 +149,6 @@
             msgfmt po/fr.po -o locale/fr/LC_MESSAGES/textgrabber.mo
             msgfmt po/en.po -o locale/en/LC_MESSAGES/textgrabber.mo
             msgfmt po/es.po -o locale/es/LC_MESSAGES/textgrabber.mo
-            chmod +x textgrabber.sh
           '';
 
           dontPatchShebangs = true; # Prevents Nix from modifying shebang lines
@@ -168,7 +167,6 @@
                  locale \
                  metadata.json \
                  *.js \
-                 textgrabber.sh \
                  schemas \
                  "${output_dir}/"
             '';
