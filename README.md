@@ -27,7 +27,6 @@ Quite often, there is text on the screen that we cannot directly select. This co
 
 ## Requirements
 
-- Bash
 - Gnome 46, 47 or 48
 - Gnome-Screenshot
 - Tesseract with at least one language data model installed
