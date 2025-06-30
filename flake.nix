@@ -97,7 +97,6 @@
 
           # Dependencies needed at runtime
           buildInputs = with pkgs; [
-            bash
             glib
             gettext
             (tesseract4.override { enableLanguages = tesseractLanguages; })

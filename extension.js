@@ -46,7 +46,6 @@ export default class extends Extension {
 
     // Check dependencies
     const dependencies = [
-      'bash',
       'tesseract',
       'gnome-screenshot',
     ];
