@@ -35,7 +35,7 @@ Quite often, there is text on the screen that we cannot directly select. This co
 ## Installation
 
 1. Download the ZIP archive.
-1. Decompress the folder `textgrabber@pierrethibault.dev` inside archive in ~/.local/share/gnome-shell/extensions/. The archive is available the releases section of the GitHub page.
+1. Decompress the folder `textgrabber@pierrethibault.dev` inside archive in ~/.local/share/gnome-shell/extensions/. The archive is available in the releases section of the GitHub page.
 1. Wayland: Logout and login back. X11: Restart the window environment (usually, Alt-F2, r, return) or logout and login back.
 1. Open the Gnome Extensions app.
 1. Activate Text Grabber in the extension list.
