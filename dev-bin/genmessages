@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+# Generate po messages from source files
+
+xgettext --from-code=UTF-8 -o po/textgrabber.pot *.js
+for lang in en fr es
+do
+msgmerge -U po/$lang.po po/textgrabber.pot
+msgfmt --check po/$lang.po
+done
+

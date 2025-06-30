@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+# Show the commands available in this flake
+# 
+system=$(uname -s | tr A-Z a-z)
+arch=$(uname -m)
+
+# Use nix flake show to list apps
+${pkgs.nix}/bin/nix flake show --json 2> /dev/null | ${pkgs.jq}/bin/jq -r '
+.apps | 
+to_entries[] | 
+.key as $system | 
+.value | 
+to_entries[] | 
+"\($system): \(.key)"
+' | grep "$arch-$system"
+
