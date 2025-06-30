@@ -10,7 +10,7 @@
   "url": "https://github.com/Pierre-Thibault/textgrabber-pierrethibault.dev",
   "settings-schema": "org.gnome.shell.extensions.textgrabber",
   "gettext-domain": "textgrabber",
-  "version-name": "1.0.5",
+  "version-name": "1.0.6",
   "donations": {
     "buymeacoffee": "https://coff.ee/pierrethibault"
   }
