@@ -1,5 +1,7 @@
 # Text Grabber
 
+> **⚠️ Looking for a new maintainer.** I no longer have time to actively maintain this project. If you'd like to take over (commit access or full repo transfer), see [issue #7](https://github.com/Pierre-Thibault/textgrabber-pierrethibault.dev/issues/7).
+
 [![stars](https://img.shields.io/github/stars/Pierre-Thibault/textgrabber-pierrethibault.dev)](https://github.com/Pierre-Thibault/textgrabber-pierrethibault.dev)
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 [![GitHub release (latest by date)](https://img.shields.io/github/v/tag/Pierre-Thibault/textgrabber-pierrethibault.dev)](https://github.com/Pierre-Thibault/textgrabber-pierrethibault.dev/releases/latest)
