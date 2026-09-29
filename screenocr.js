@@ -9,6 +9,10 @@ import Shell from 'gi://Shell';
 
 const Cursor = Clutter.CursorType ?? Meta.Cursor;
 
+// Gnome 50+ provides gesture and key controllers. They replace the legacy
+// event signals (deprecated in Gnome 51) and handle touch screens as well.
+export const HAS_CONTROLLERS = Clutter.PanGesture !== undefined && Clutter.KeyController !== undefined;
+
 function setCursor(actor, cursor) {
   if (typeof Clutter.CursorType !== 'undefined' && actor && 'cursor_type' in actor) {
     try {
@@ -26,13 +30,15 @@ export class ScreenOCR {
   constructor() {
     this._imageFile = null;
     this._textFile = null;
+    this._cancelSelection = null;
+    this._cancelled = false;
   }
 
   _sendNotification(title, message) {
     try {
       Main.notify(title, message);
     } catch (e) {
-      log(`Error while trying to send a notification: ${e.message}`);
+      console.error(`Error while trying to send a notification: ${e.message}`);
     }
   }
 
@@ -49,6 +55,7 @@ export class ScreenOCR {
             const [_, stdout, stderr] = proc.communicate_utf8_finish(result);
             if (!proc.get_successful()) {
               reject(new Error(`Command ${command} has failed: ${stderr}`));
+              return;
             }
             resolve(stdout);
           } catch (e) {
@@ -63,11 +70,21 @@ export class ScreenOCR {
 
   async _createTempFiles() {
     try {
-      this._imageFile = Gio.File.new_tmp('XXXXXX.png')[0];
-      this._textFile = Gio.File.new_tmp('XXXXXX.txt')[0];
+      // new_tmp() also opens the files: close the streams to not leak file descriptors
+      let stream;
+      [this._imageFile, stream] = Gio.File.new_tmp('XXXXXX.png');
+      stream.close(null);
+      [this._textFile, stream] = Gio.File.new_tmp('XXXXXX.txt');
+      stream.close(null);
     } catch (e) {
       throw new Error(`Unable to create temporary files: ${e.message}`);
     }
+  }
+
+  cancel() {
+    // Abort the grab: remove the selection overlay right away if it is shown
+    this._cancelled = true;
+    this._cancelSelection?.();
   }
 
   _selectArea() {
@@ -134,7 +151,7 @@ export class ScreenOCR {
         width: global.screen_width,
         height: global.screen_height
       });
-      
+
       setCursor(captureActor, Cursor.CROSSHAIR);
 
       // Whiete border marquise
@@ -151,17 +168,21 @@ export class ScreenOCR {
       Main.uiGroup.add_child(captureActor);
       Main.uiGroup.add_child(selectionActor);
 
-      const grab = Main.pushModal(captureActor);
-
-      if (!grab) {
-        console.error('Failed to grab modal');
-        setCursor(captureActor, Cursor.DEFAULT);
+      const destroyActors = () => {
         [fullOverlay, overlayTop, overlayBottom, overlayLeft, overlayRight, captureActor, selectionActor].forEach(actor => {
           if (actor) {
             Main.uiGroup.remove_child(actor);
             actor.destroy();
           }
         });
+      };
+
+      const grab = Main.pushModal(captureActor);
+
+      if (!grab) {
+        console.error('Failed to grab modal');
+        setCursor(captureActor, Cursor.DEFAULT);
+        destroyActors();
         resolve([0, 0, 0, 0]);
         return;
       }
@@ -192,38 +213,32 @@ export class ScreenOCR {
         overlayRight.set_size(global.screen_width - (x + width), height);
       };
 
+      const signalIds = [];
+      let done = false;
+      let isDrawing = false;
+
       const cleanup = () => {
-        if (buttonPressId) captureActor.disconnect(buttonPressId);
-        if (motionId) captureActor.disconnect(motionId);
-        if (buttonReleaseId) captureActor.disconnect(buttonReleaseId);
-        if (keyPressId) captureActor.disconnect(keyPressId);
+        signalIds.forEach(([object, id]) => object.disconnect(id));
+        this._cancelSelection = null;
 
         setCursor(captureActor, Cursor.DEFAULT);
 
         Main.popModal(grab);
-        [fullOverlay, overlayTop, overlayBottom, overlayLeft, overlayRight, captureActor, selectionActor].forEach(actor => {
-          if (actor) {
-            Main.uiGroup.remove_child(actor);
-            actor.destroy();
-          }
-        });
+        destroyActors();
       };
 
-      let isDrawing = false;
-
-      let buttonPressId = captureActor.connect('button-press-event', (_actor, event) => {
-        [startX, startY] = event.get_coords();
+      // Selection steps shared by the gesture controllers and the legacy event signals
+      const startSelection = (x, y) => {
+        [startX, startY] = [x, y];
         isDrawing = true;
         selectionActor.set_position(startX, startY);
         selectionActor.set_size(0, 0);
         selectionActor.show();
-        return Clutter.EVENT_STOP;
-      });
+      };
 
-      let motionId = captureActor.connect('motion-event', (_actor, event) => {
-        if (!isDrawing) return Clutter.EVENT_PROPAGATE;
+      const updateSelection = (currentX, currentY) => {
+        if (!isDrawing) return;
 
-        const [currentX, currentY] = event.get_coords();
         const x = Math.min(startX, currentX);
         const y = Math.min(startY, currentY);
         const width = Math.abs(currentX - startX);
@@ -234,18 +249,18 @@ export class ScreenOCR {
 
         // Update the overlays to create a hole
         updateOverlays(x, y, width, height);
+      };
 
-        return Clutter.EVENT_STOP;
-      });
+      const finishSelection = (currentX, currentY) => {
+        if (done) return;
+        done = true;
 
-      let buttonReleaseId = captureActor.connect('button-release-event', (_actor, event) => {
         if (!isDrawing) {
           cleanup();
           resolve([0, 0, 0, 0]);
-          return Clutter.EVENT_STOP;
+          return;
         }
 
-        const [currentX, currentY] = event.get_coords();
         const x = Math.round(Math.min(startX, currentX));
         const y = Math.round(Math.min(startY, currentY));
         const width = Math.round(Math.abs(currentX - startX));
@@ -253,18 +268,70 @@ export class ScreenOCR {
 
         cleanup();
         resolve([x, y, width, height]);
+      };
 
-        return Clutter.EVENT_STOP;
-      });
+      const cancelSelection = () => {
+        if (done) return;
+        done = true;
+        cleanup();
+        resolve([0, 0, 0, 0]);
+      };
+      this._cancelSelection = cancelSelection;
 
-      let keyPressId = captureActor.connect('key-press-event', (_actor, event) => {
-        if (event.get_key_symbol() === Clutter.KEY_Escape) {
-          cleanup();
-          resolve([0, 0, 0, 0]);
+      if (HAS_CONTROLLERS) {
+        // Mouse and touch screen
+        const panGesture = new Clutter.PanGesture();
+        panGesture.set_begin_threshold(0);
+        signalIds.push([panGesture, panGesture.connect('recognize', () => {
+          const { x, y } = panGesture.get_begin_centroid_abs();
+          startSelection(x, y);
+        })]);
+        signalIds.push([panGesture, panGesture.connect('pan-update', () => {
+          const { x, y } = panGesture.get_centroid_abs();
+          updateSelection(x, y);
+        })]);
+        signalIds.push([panGesture, panGesture.connect('end', () => {
+          const { x, y } = panGesture.get_centroid_abs();
+          finishSelection(x, y);
+        })]);
+        signalIds.push([panGesture, panGesture.connect('cancel', cancelSelection)]);
+        captureActor.add_action(panGesture);
+
+        const keyController = new Clutter.KeyController();
+        signalIds.push([keyController, keyController.connect('key-press', () => {
+          const [, keyval] = keyController.get_key();
+          if (keyval === Clutter.KEY_Escape) {
+            cancelSelection();
+            return Clutter.EVENT_STOP;
+          }
+          return Clutter.EVENT_PROPAGATE;
+        })]);
+        captureActor.add_action(keyController);
+      } else {
+        signalIds.push([captureActor, captureActor.connect('button-press-event', (_actor, event) => {
+          startSelection(...event.get_coords());
           return Clutter.EVENT_STOP;
-        }
-        return Clutter.EVENT_PROPAGATE;
-      });
+        })]);
+
+        signalIds.push([captureActor, captureActor.connect('motion-event', (_actor, event) => {
+          if (!isDrawing) return Clutter.EVENT_PROPAGATE;
+          updateSelection(...event.get_coords());
+          return Clutter.EVENT_STOP;
+        })]);
+
+        signalIds.push([captureActor, captureActor.connect('button-release-event', (_actor, event) => {
+          finishSelection(...event.get_coords());
+          return Clutter.EVENT_STOP;
+        })]);
+
+        signalIds.push([captureActor, captureActor.connect('key-press-event', (_actor, event) => {
+          if (event.get_key_symbol() === Clutter.KEY_Escape) {
+            cancelSelection();
+            return Clutter.EVENT_STOP;
+          }
+          return Clutter.EVENT_PROPAGATE;
+        })]);
+      }
     });
   }
 
@@ -308,38 +375,31 @@ export class ScreenOCR {
 
       if (!this._textFile.query_exists(null)) {
         throw new Error('No file output from Tesseract.');
-      } else if (isFileEmpty(this._textFile)) {
-        return false;  // OCR has failed (this is not an error)
       }
     } catch (e) {
       throw new Error(`OCR has failed: ${e.message}`);
     }
-    return true;
   }
 
-  async _copyToClipboard() {
-    try {
-      // Read the content of the text file
-      const [success, contents] = await new Promise((resolve, reject) => {
-        this._textFile.load_contents_async(null, (file, result) => {
-          try {
-            const [success, contents] = file.load_contents_finish(result);
-            resolve([success, contents]);
-          } catch (e) {
-            reject(e);
-
-            throw new Error();
-          }
-        });
+  async _readText() {
+    // Read the content of the text file
+    const contents = await new Promise((resolve, reject) => {
+      this._textFile.load_contents_async(null, (file, result) => {
+        try {
+          const [, contents] = file.load_contents_finish(result);
+          resolve(contents);
+        } catch (e) {
+          reject(new Error(`Reading text file failed: ${e.message}`));
+        }
       });
+    });
 
-      if (!success) {
-        throw new Error('Reading text file failed.');
-      }
+    return new TextDecoder().decode(contents).trim();
+  }
 
-      const text = new TextDecoder().decode(contents).trim();
-
-      St.Clipboard.get_default().set_text(St.ClipboardType.CLIPBOARD, text)
+  _copyToClipboard(text) {
+    try {
+      St.Clipboard.get_default().set_text(St.ClipboardType.CLIPBOARD, text);
     } catch (e) {
       throw new Error(`Copy to clipboard failed: ${e.message}`);
     }
@@ -372,7 +432,7 @@ export class ScreenOCR {
 
       const [x, y, width, height] = await this._selectArea();
 
-      if (width === 0 || height === 0) {
+      if (this._cancelled || width === 0 || height === 0) {
         console.log('Cancelled selection');
         await this._cleanup();
         return true;
@@ -385,14 +445,23 @@ export class ScreenOCR {
         return true;
       }
 
-      const isOCRSuccessful = await this._performOCR(languages);
-      this._sendNotification(isOCRSuccessful ? _('Text copied to the clipboard!') + ' 😀' : _('OCR failed.') + ' 🙁');
-      await this._copyToClipboard();
+      await this._performOCR(languages);
+      const text = this._cancelled ? '' : await this._readText();
+
+      if (this._cancelled) {
+        // The extension has been disabled in the meantime
+      } else if (text) {
+        this._copyToClipboard(text);
+        this._sendNotification(_('Text copied to the clipboard!') + ' 😀');
+      } else {
+        // Keep the current clipboard content when no text is found
+        this._sendNotification(_('OCR failed.') + ' 🙁');
+      }
       await this._cleanup();
       return true;
     } catch (e) {
       this._sendNotification(_('An error occurred during the OCR process.') + ' 🙁', e.message);
-      log(e.message);
+      console.error(e.message);
       await this._cleanup();
       return false;
     }

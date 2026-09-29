@@ -1,3 +1,4 @@
+import Clutter from 'gi://Clutter';
 import St from 'gi://St';
 import GLib from 'gi://GLib';
 import Meta from 'gi://Meta';
@@ -9,7 +10,7 @@ import { Extension, gettext as _ } from 'resource:///org/gnome/shell/extensions/
 
 import { schemaKeys } from "./const.js";
 import { getAvailableLanguages } from "./languages.js";
-import { ScreenOCR } from "./screenocr.js";
+import { HAS_CONTROLLERS, ScreenOCR } from "./screenocr.js";
 
 export default class extends Extension {
   constructor(metadata) {
@@ -18,6 +19,7 @@ export default class extends Extension {
     this._buttonSignalHandler = null;
     this._keyboardShortcutChangeSignalHandler = null;
     this._settings = null;
+    this._screenOCR = null;
   }
 
   enable() {
@@ -75,7 +77,6 @@ export default class extends Extension {
   _updateButton(show) {
     if (show && !this._button) {
       this._button = new PanelMenu.Button(0.0, 'Text Grabber', true);
-	
       this._button.clear_actions();
 
       // Use an icon instead of text
@@ -85,9 +86,16 @@ export default class extends Extension {
       });
 
       this._button.add_child(icon);
-      this._button.connect('button-release-event', () => {
-        this._grabText();
-      });
+      if (HAS_CONTROLLERS) {
+        const clickGesture = new Clutter.ClickGesture();
+        clickGesture.connect('recognize', () => this._grabText());
+        this._button.add_action(clickGesture);
+      } else {
+        this._button.connect('button-release-event', () => {
+          this._grabText();
+          return Clutter.EVENT_STOP;
+        });
+      }
 
       Main.panel.addToStatusArea('textgrabber', this._button);
     } else if (!show && this._button) {
@@ -98,6 +106,16 @@ export default class extends Extension {
 
   _bindShortcut() {
     // Add shortcut from settings (default: <Super>t from schema)
+    this._addKeybinding();
+
+    // Listen for shortcut changes
+    this._keyboardShortcutChangeSignalHandler = this._settings.connect(`changed::${schemaKeys.textgrabberShortcut}`, () => {
+      Main.wm.removeKeybinding(schemaKeys.textgrabberShortcut);
+      this._addKeybinding();
+    });
+  }
+
+  _addKeybinding() {
     Main.wm.addKeybinding(
       schemaKeys.textgrabberShortcut,
       this._settings,
@@ -105,27 +123,28 @@ export default class extends Extension {
       Shell.ActionMode.NORMAL | Shell.ActionMode.OVERVIEW,
       () => this._grabText()
     );
-
-    // Listen for shortcut changes
-    this._keyboardShortcutChangeSignalHandler = this._settings.connect(`changed::${schemaKeys.textgrabberShortcut}`, () => {
-      Main.wm.removeKeybinding(schemaKeys.textgrabberShortcut);
-      Main.wm.addKeybinding(
-        schemaKeys.textgrabberShortcut,
-        this._settings,
-        Meta.KeyBindingFlags.NONE,
-        Shell.ActionMode.ALL,
-        () => this._grabText()
-      );
-    });
   }
 
   _grabText() {
+    // Only one grab at a time
+    if (this._screenOCR) {
+      return;
+    }
     let languages = this._settings.get_strv(schemaKeys.tesseractLanguages);
     let langString = languages.join('+');
-    new ScreenOCR().grabText(langString).catch(_ => { });
+    const screenOCR = new ScreenOCR();
+    this._screenOCR = screenOCR;
+    screenOCR.grabText(langString).catch(_ => { }).finally(() => {
+      if (this._screenOCR === screenOCR) {
+        this._screenOCR = null;
+      }
+    });
   }
 
   disable() {
+    // Remove the selection overlay if a grab is in progress
+    this._screenOCR?.cancel();
+    this._screenOCR = null;
     this._button?.destroy();
     this._button = null;
     if (this._buttonSignalHandler) {

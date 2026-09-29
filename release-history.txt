@@ -13,3 +13,9 @@ Today, 2025-06-30, I begin the release history. There were two releases before, 
 2026-05-08: 1.2.1: Updated extension for Gnome 50 (contributed by Oharagyk).
 
 2026-09-29: 1.3.0: Added support for Gnome 51.
+	- Gnome 50+: area selection uses Clutter gestures (touch screen support) and key controllers
+	- Keep the clipboard unchanged when no text is found
+	- Ignore the shortcut while a selection is already in progress
+	- Remove the selection overlay when the extension is disabled during a selection
+	- Keep the same shortcut options after changing the shortcut
+	- Close temporary file streams
