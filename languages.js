@@ -92,7 +92,7 @@ function getTesseractInstalledLanguages() {
       return new TextDecoder().decode(stdout).split('\n').slice(1).filter(lang => lang.trim() !== '');
     }
   } catch (e) {
-    logError(e, 'Failed to fetch Tesseract languages');
+    console.error(`Failed to fetch Tesseract languages: ${e.message}`);
   }
   return [];
 }

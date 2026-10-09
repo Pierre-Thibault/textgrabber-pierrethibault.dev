@@ -6,12 +6,14 @@
     "46",
     "47",
     "48",
-    "49"
+    "49",
+    "50",
+    "51"
   ],
   "url": "https://github.com/Pierre-Thibault/textgrabber-pierrethibault.dev",
   "settings-schema": "org.gnome.shell.extensions.textgrabber",
   "gettext-domain": "textgrabber",
-  "version-name": "1.2.0",
+  "version-name": "1.3.0",
   "donations": {
     "buymeacoffee": "pierrethibault"
   }

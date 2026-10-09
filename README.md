@@ -29,7 +29,7 @@ Quite often, there is text on the screen that we cannot directly select. This co
 
 ## Requirements
 
-- Gnome 46, 47, 48 or 49
+- Gnome 46, 47, 48, 49, 50 or 51
 - Tesseract with at least one language data model installed
 
 ## Installation
