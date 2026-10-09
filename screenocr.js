@@ -11,7 +11,8 @@ const Cursor = Clutter.CursorType ?? Meta.Cursor;
 
 // Gnome 50+ provides gesture and key controllers. They replace the legacy
 // event signals (deprecated in Gnome 51) and handle touch screens as well.
-export const HAS_CONTROLLERS = Clutter.PanGesture !== undefined && Clutter.KeyController !== undefined;
+// ClickGesture is required for the panel button (extension.js).
+export const HAS_CONTROLLERS = Clutter.PanGesture !== undefined && Clutter.KeyController !== undefined && Clutter.ClickGesture !== undefined;
 
 function setCursor(actor, cursor) {
   if (typeof Clutter.CursorType !== 'undefined' && actor && 'cursor_type' in actor) {
@@ -23,7 +24,7 @@ function setCursor(actor, cursor) {
     }
   }
 
-  global.display.set_cursor(cursor);
+  global.display?.set_cursor?.(cursor);
 }
 
 export class ScreenOCR {
@@ -154,7 +155,7 @@ export class ScreenOCR {
 
       setCursor(captureActor, Cursor.CROSSHAIR);
 
-      // Whiete border marquise
+      // White border marquise
       selectionActor = new St.Widget({
         style: 'border: 2px solid white;',
         visible: false
@@ -204,7 +205,7 @@ export class ScreenOCR {
         overlayBottom.set_position(0, y + height);
         overlayBottom.set_size(global.screen_width, global.screen_height - (y + height));
 
-        // Left: frm y to y+height, from 0 à x
+        // Left: from y to y+height, from 0 to x
         overlayLeft.set_position(0, y);
         overlayLeft.set_size(x, height);
 
