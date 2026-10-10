@@ -2,6 +2,7 @@ import Adw from "gi://Adw";
 import Gdk from 'gi://Gdk';
 import Gtk from "gi://Gtk";
 import Gio from "gi://Gio";
+import GLib from "gi://GLib";
 import GObject from 'gi://GObject';
 
 import { ExtensionPreferences, gettext as _ } from 'resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js';
@@ -34,6 +35,21 @@ export default class extends ExtensionPreferences {
     settings.bind(schemaKeys.showButton, showButtonSwitch, 'active', Gio.SettingsBindFlags.DEFAULT);
     showButtonRow.add_suffix(showButtonSwitch);
     mainGroup.add(showButtonRow);
+
+    // OCR engine
+    const engines = ['tesseract', 'easyocr', 'both'];
+    const engineRow = new Adw.ComboRow({
+      title: _('OCR engine'),
+      subtitle: GLib.find_program_in_path('easyocr')
+        ? _('EasyOCR is slower and ignores the languages it does not support. With Both, the longest result is kept.')
+        : _('EasyOCR is not installed.'),
+      model: Gtk.StringList.new(['Tesseract', 'EasyOCR', _('Both')]),
+      selected: Math.max(engines.indexOf(settings.get_string(schemaKeys.ocrEngine)), 0)
+    });
+    engineRow.connect('notify::selected', () => {
+      settings.set_string(schemaKeys.ocrEngine, engines[engineRow.selected]);
+    });
+    mainGroup.add(engineRow);
 
     // Shortcut group (mostly from https://github.com/eonpatapon/gnome-shell-extension-caffeine)
     let shortcutSettingWidget = new ShortcutSettingWidget(

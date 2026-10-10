@@ -16,5 +16,15 @@
       <summary>Tesseract languages</summary>
       <description>Languages used by Tesseract for OCR.</description>
     </key>
+    <key name="ocr-engine" type="s">
+      <choices>
+        <choice value="tesseract"/>
+        <choice value="easyocr"/>
+        <choice value="both"/>
+      </choices>
+      <default>'tesseract'</default>
+      <summary>OCR engine</summary>
+      <description>Engine used for OCR: Tesseract, EasyOCR or both (the longest result is kept).</description>
+    </key>
   </schema>
 </schemalist>

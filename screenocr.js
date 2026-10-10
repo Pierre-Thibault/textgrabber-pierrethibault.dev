@@ -7,6 +7,8 @@ import * as Main from 'resource:///org/gnome/shell/ui/main.js';
 import { gettext as _ } from 'resource:///org/gnome/shell/extensions/extension.js';
 import Shell from 'gi://Shell';
 
+import { getEasyOCRLanguages } from "./languages.js";
+
 const Cursor = Clutter.CursorType ?? Meta.Cursor;
 
 // Gnome 50+ provides gesture and key controllers. They replace the legacy
@@ -32,7 +34,7 @@ export class ScreenOCR {
     this._imageFile = null;
     this._textFile = null;
     this._cancelSelection = null;
-    this._cancelled = false;
+    this._cancellable = new Gio.Cancellable();
   }
 
   _sendNotification(title, message) {
@@ -51,7 +53,11 @@ export class ScreenOCR {
           Gio.SubprocessFlags.STDOUT_PIPE | Gio.SubprocessFlags.STDERR_PIPE | (input ? Gio.SubprocessFlags.STDIN_PIPE : 0)
         );
 
+        // Stop the process if the grab is cancelled (runs right away if already cancelled)
+        const cancelledId = this._cancellable.connect(() => proc.force_exit());
+
         proc.communicate_utf8_async(input, null, (proc, result) => {
+          this._cancellable.disconnect(cancelledId);
           try {
             const [_, stdout, stderr] = proc.communicate_utf8_finish(result);
             if (!proc.get_successful()) {
@@ -84,7 +90,8 @@ export class ScreenOCR {
 
   cancel() {
     // Abort the grab: remove the selection overlay right away if it is shown
-    this._cancelled = true;
+    // and stop the OCR processes
+    this._cancellable.cancel();
     this._cancelSelection?.();
   }
 
@@ -365,12 +372,36 @@ export class ScreenOCR {
     });
   }
 
-  async _performOCR(languages) {
+  async _performOCR(languages, engine) {
+    if (engine === 'easyocr') {
+      return this._runEasyOCR(languages);
+    }
+    if (engine !== 'both') {
+      return this._runTesseract(languages);
+    }
+
+    // Run both engines and keep the longest result, Tesseract wins ties
+    const results = await Promise.allSettled([this._runTesseract(languages), this._runEasyOCR(languages)]);
+    const texts = [];
+    for (const result of results) {
+      if (result.status === 'fulfilled') {
+        texts.push(result.value);
+      } else if (!this._cancellable.is_cancelled()) {
+        console.warn(result.reason.message);
+      }
+    }
+    if (!texts.length) {
+      throw results[0].reason;
+    }
+    return texts.reduce((longest, text) => text.length > longest.length ? text : longest);
+  }
+
+  async _runTesseract(languages) {
     try {
       const textFilePath = this._textFile.get_path();  // Tesseract adds .txt extension itself
       const tesseractArgs = [this._imageFile.get_path(), textFilePath.slice(0, textFilePath.length - ".txt".length)];
-      if (languages) {
-        tesseractArgs.push(...['-l', languages]);
+      if (languages.length) {
+        tesseractArgs.push(...['-l', languages.join('+')]);
       }
       await this._runCommandAsync('tesseract', tesseractArgs);
 
@@ -379,6 +410,28 @@ export class ScreenOCR {
       }
     } catch (e) {
       throw new Error(`OCR has failed: ${e.message}`);
+    }
+    return this._readText();
+  }
+
+  async _runEasyOCR(languages) {
+    if (!GLib.find_program_in_path('easyocr')) {
+      throw new Error(_('EasyOCR is not installed.'));
+    }
+    const easyocrArgs = [
+      '-l', ...getEasyOCRLanguages(languages),
+      '-f', this._imageFile.get_path(),
+      '--detail', '0',
+      // EasyOCR converts its boolean options with bool(): only an empty string gives False.
+      // Otherwise, a progress bar is printed with the text when a model is downloaded.
+      '--verbose', '',
+    ];
+    try {
+      const stdout = await this._runCommandAsync('easyocr', easyocrArgs);
+      return stdout.trim();
+    } catch (e) {
+      // Keep only the last line of the Python traceback
+      throw new Error(`EasyOCR has failed: ${e.message.trim().split('\n').pop()}`);
     }
   }
 
@@ -427,13 +480,13 @@ export class ScreenOCR {
     }
   }
 
-  async grabText(languages) {
+  async grabText(languages, engine) {
     try {
       await this._createTempFiles();
 
       const [x, y, width, height] = await this._selectArea();
 
-      if (this._cancelled || width === 0 || height === 0) {
+      if (this._cancellable.is_cancelled() || width === 0 || height === 0) {
         console.log('Cancelled selection');
         await this._cleanup();
         return true;
@@ -446,10 +499,9 @@ export class ScreenOCR {
         return true;
       }
 
-      await this._performOCR(languages);
-      const text = this._cancelled ? '' : await this._readText();
+      const text = await this._performOCR(languages, engine);
 
-      if (this._cancelled) {
+      if (this._cancellable.is_cancelled()) {
         // The extension has been disabled in the meantime
       } else if (text) {
         this._copyToClipboard(text);
@@ -461,8 +513,10 @@ export class ScreenOCR {
       await this._cleanup();
       return true;
     } catch (e) {
-      this._sendNotification(_('An error occurred during the OCR process.') + ' 🙁', e.message);
-      console.error(e.message);
+      if (!this._cancellable.is_cancelled()) {
+        this._sendNotification(_('An error occurred during the OCR process.') + ' 🙁', e.message);
+        console.error(e.message);
+      }
       await this._cleanup();
       return false;
     }
