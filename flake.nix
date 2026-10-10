@@ -115,10 +115,11 @@
           buildPhase = ''
             glib-compile-schemas schemas
             xgettext --from-code=UTF-8 -p po -o textgrabber.pot *.js
-            mkdir -p locale/{fr,en,es}/LC_MESSAGES
+            mkdir -p locale/{fr,en,es,de}/LC_MESSAGES
             msgfmt po/fr.po -o locale/fr/LC_MESSAGES/textgrabber.mo
             msgfmt po/en.po -o locale/en/LC_MESSAGES/textgrabber.mo
             msgfmt po/es.po -o locale/es/LC_MESSAGES/textgrabber.mo
+            msgfmt po/de.po -o locale/de/LC_MESSAGES/textgrabber.mo
           '';
 
           dontPatchShebangs = true; # Prevents Nix from modifying shebang lines
