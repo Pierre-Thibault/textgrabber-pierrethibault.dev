@@ -131,10 +131,10 @@ export default class extends Extension {
       return;
     }
     let languages = this._settings.get_strv(schemaKeys.tesseractLanguages);
-    let langString = languages.join('+');
+    let engine = this._settings.get_string(schemaKeys.ocrEngine);
     const screenOCR = new ScreenOCR();
     this._screenOCR = screenOCR;
-    screenOCR.grabText(langString).catch(_ => { }).finally(() => {
+    screenOCR.grabText(languages, engine).catch(_ => { }).finally(() => {
       if (this._screenOCR === screenOCR) {
         this._screenOCR = null;
       }
