@@ -21,3 +21,4 @@ Today, 2025-06-30, I begin the release history. There were two releases before, 
 	- Close temporary file streams
 	- German translation (contributed by uwe-ss)
 	- Optional EasyOCR engine, alone or with Tesseract (the longest result is kept)
+	- Right-click menu on the top panel icon: Settings and Quit
