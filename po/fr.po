@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: textgrabber\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-10 23:42+0530\n"
+"POT-Creation-Date: 2026-10-11 01:00+0530\n"
 "PO-Revision-Date: 2025-06-19 21:00-0400\n"
 "Last-Translator: Pierre Thibault <pierre.thibault@pierrethibault.dev>\n"
 "Language-Team: French <fr@li.org>\n"
@@ -11,17 +11,25 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: extension.js:62
+#: extension.js:63
 msgid "Missing dependencies: "
 msgstr "Dépendances manquantes : "
 
-#: extension.js:65
+#: extension.js:66
 msgid "Ensure to install Tesseract with your language(s)."
 msgstr "Assurez-vous d'installer Tesseract avec vos langues."
 
-#: extension.js:68 prefs.js:89
+#: extension.js:69 prefs.js:89
 msgid "No known Tesseract languages installed."
 msgstr "Aucune langue Tesseract connue installée."
+
+#: extension.js:93
+msgid "Settings"
+msgstr "Paramètres"
+
+#: extension.js:94
+msgid "Quit"
+msgstr "Quitter"
 
 #: languages.js:113
 msgid "Afrikaans"
@@ -328,8 +336,12 @@ msgid "OCR engine"
 msgstr "Moteur OCR"
 
 #: prefs.js:44
-msgid "EasyOCR is slower and ignores the languages it does not support. With Both, the longest result is kept."
-msgstr "EasyOCR est plus lent et ignore les langues qu'il ne prend pas en charge. Avec « Les deux », le résultat le plus long est conservé."
+msgid ""
+"EasyOCR is slower and ignores the languages it does not support. With Both, "
+"the longest result is kept."
+msgstr ""
+"EasyOCR est plus lent et ignore les langues qu'il ne prend pas en charge. "
+"Avec « Les deux », le résultat le plus long est conservé."
 
 #: prefs.js:45 screenocr.js:419
 msgid "EasyOCR is not installed."

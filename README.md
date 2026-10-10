@@ -23,6 +23,7 @@ Quite often, there is text on the screen that we cannot directly select. This co
 ### Functionalities
 
 - Can appear or not appear in the top panel.
+- Right-click the top panel icon to open the settings or to quit.
 - Assign an optional keyboard shortcut for fast access.
 - Define the language(s) to use for Tesseract.
 - Choose the OCR engine: Tesseract, EasyOCR or both (the longest result is kept).
@@ -44,7 +45,7 @@ Quite often, there is text on the screen that we cannot directly select. This co
 
 ## Usage
 
-By default, the icon will appear on the Gnome Top Panel. Just click the icon, click on the screen and hold the mouse button to create a marquee around the text to grab. If everything works fine, the text is now available in the clipboard. Otherwise, you can also assign a keyboard shortcut if you prefer. The rest is self-explanatory.
+By default, the icon will appear on the Gnome Top Panel. Just click the icon, click on the screen and hold the mouse button to create a marquee around the text to grab. Right-click the icon for the settings or to quit Text Grabber (turn it back on in the Extensions app). If everything works fine, the text is now available in the clipboard. Otherwise, you can also assign a keyboard shortcut if you prefer. The rest is self-explanatory.
 
 ### Top Panel: 
 
