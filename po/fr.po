@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: textgrabber\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-10 23:42+0530\n"
+"POT-Creation-Date: 2026-10-14 16:10+0000\n"
 "PO-Revision-Date: 2025-06-19 21:00-0400\n"
 "Last-Translator: Pierre Thibault <pierre.thibault@pierrethibault.dev>\n"
 "Language-Team: French <fr@li.org>\n"
@@ -19,7 +19,7 @@ msgstr "Dépendances manquantes : "
 msgid "Ensure to install Tesseract with your language(s)."
 msgstr "Assurez-vous d'installer Tesseract avec vos langues."
 
-#: extension.js:68 prefs.js:89
+#: extension.js:68 prefs.js:105
 msgid "No known Tesseract languages installed."
 msgstr "Aucune langue Tesseract connue installée."
 
@@ -328,10 +328,14 @@ msgid "OCR engine"
 msgstr "Moteur OCR"
 
 #: prefs.js:44
-msgid "EasyOCR is slower and ignores the languages it does not support. With Both, the longest result is kept."
-msgstr "EasyOCR est plus lent et ignore les langues qu'il ne prend pas en charge. Avec « Les deux », le résultat le plus long est conservé."
+msgid ""
+"EasyOCR is slower and ignores the languages it does not support. With Both, "
+"the longest result is kept."
+msgstr ""
+"EasyOCR est plus lent et ignore les langues qu'il ne prend pas en charge. "
+"Avec « Les deux », le résultat le plus long est conservé."
 
-#: prefs.js:45 screenocr.js:419
+#: prefs.js:45 screenocr.js:462
 msgid "EasyOCR is not installed."
 msgstr "EasyOCR n'est pas installé."
 
@@ -339,51 +343,77 @@ msgstr "EasyOCR n'est pas installé."
 msgid "Both"
 msgstr "Les deux"
 
+#: prefs.js:56
+msgid "Read QR codes and barcodes"
+msgstr "Lire les codes QR et les codes-barres"
+
 #: prefs.js:58
+msgid ""
+"When the selected area contains a code, its content is copied instead of the "
+"text."
+msgstr "Quand la zone sélectionnée contient un code, son contenu est copié au lieu du texte."
+
+#: prefs.js:59
+msgid "zbar is not installed."
+msgstr "zbar n'est pas installé."
+
+#: prefs.js:74
 msgid "Toggle shortcut"
 msgstr "Raccourci clavier"
 
-#: prefs.js:59
+#: prefs.js:75
 msgid "Use Backspace to clear"
 msgstr "Espace arrière pour effacer"
 
-#: prefs.js:78
+#: prefs.js:94
 msgid "Shortcut"
 msgstr "Raccourci"
 
-#: prefs.js:88
+#: prefs.js:104
 msgid "Text Languages"
 msgstr "Langues du texte"
 
-#: prefs.js:89
+#: prefs.js:105
 msgid "Select languages for OCR"
 msgstr "Sélectionnez les langues pour l'OCR"
 
-#: prefs.js:118
+#: prefs.js:134
 msgid "No languages available"
 msgstr "Aucune langue disponible"
 
-#: prefs.js:119
+#: prefs.js:135
 #, fuzzy
 msgid "Install Tesseract language data to enable OCR."
 msgstr "Installez un modèle de langue Tesseract pour activer l'OCR."
 
-#: prefs.js:127
+#: prefs.js:143
 msgid "currentLanguage"
 msgstr "fr"
 
-#: prefs.js:170 prefs.js:198
+#: prefs.js:186 prefs.js:214
 msgid "New accelerator…"
 msgstr "Nouvel accélérateur…"
 
-#: screenocr.js:508
+#: screenocr.js:66
+msgid "Open link"
+msgstr "Ouvrir le lien"
+
+#: screenocr.js:67
+msgid "QR code or barcode copied to the clipboard!"
+msgstr "Code QR ou code-barres copié dans le presse-papiers!"
+
+#: screenocr.js:74
+msgid "Could not open the link."
+msgstr "Impossible d'ouvrir le lien."
+
+#: screenocr.js:556
 msgid "Text copied to the clipboard!"
 msgstr "Texte copié dans le presse-papiers!"
 
-#: screenocr.js:511
+#: screenocr.js:559
 msgid "OCR failed."
 msgstr "L'OCR a échoué."
 
-#: screenocr.js:517
+#: screenocr.js:565
 msgid "An error occurred during the OCR process."
 msgstr "Une erreur s'est produite durant le processus OCR."

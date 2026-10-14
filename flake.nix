@@ -103,6 +103,7 @@
             gnome-screenshot
             wl-clipboard
             xsel
+            zbar
           ];
 
           # Dependencies needed at build time
@@ -159,6 +160,7 @@
             gnome-screenshot
             wl-clipboard
             xsel
+            zbar
             zip
             rsync
             # For this flake itself

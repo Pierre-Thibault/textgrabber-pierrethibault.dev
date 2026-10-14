@@ -26,5 +26,10 @@
       <summary>OCR engine</summary>
       <description>Engine used for OCR: Tesseract, EasyOCR or both (the longest result is kept).</description>
     </key>
+    <key name="read-codes" type="b">
+      <default>true</default>
+      <summary>Read QR codes and barcodes</summary>
+      <description>When the selected area contains a QR code or a barcode, its content is copied instead of the text. Requires zbar (zbarimg).</description>
+    </key>
   </schema>
 </schemalist>

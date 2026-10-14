@@ -4,9 +4,11 @@ import GLib from "gi://GLib";
 import Meta from 'gi://Meta';
 import St from 'gi://St';
 import * as Main from 'resource:///org/gnome/shell/ui/main.js';
+import * as MessageTray from 'resource:///org/gnome/shell/ui/messageTray.js';
 import { gettext as _ } from 'resource:///org/gnome/shell/extensions/extension.js';
 import Shell from 'gi://Shell';
 
+import { getWebLink, getZbarimgArgs, parseZbarimgOutput, ZBARIMG } from "./codes.js";
 import { getEasyOCRLanguages } from "./languages.js";
 
 const Cursor = Clutter.CursorType ?? Meta.Cursor;
@@ -37,11 +39,39 @@ export class ScreenOCR {
     this._cancellable = new Gio.Cancellable();
   }
 
-  _sendNotification(title, message) {
+  _sendNotification(title, message, action = null) {
     try {
-      Main.notify(title, message);
+      if (!action) {
+        Main.notify(title, message);
+        return;
+      }
+      // Same notification as Main.notify(), with a button
+      const source = MessageTray.getSystemSource();
+      const notification = new MessageTray.Notification({
+        source,
+        title,
+        body: message,
+        isTransient: true,
+      });
+      notification.addAction(action.label, action.callback);
+      source.addNotification(notification);
     } catch (e) {
       console.error(`Error while trying to send a notification: ${e.message}`);
+    }
+  }
+
+  _notifyCode(code) {
+    // Show the content: unlike text, a code cannot be read on the screen
+    const link = getWebLink(code);
+    const action = link ? { label: _('Open link'), callback: () => this._openLink(link) } : null;
+    this._sendNotification(_('QR code or barcode copied to the clipboard!') + ' 😀', code, action);
+  }
+
+  _openLink(link) {
+    try {
+      Gio.AppInfo.launch_default_for_uri(link, global.create_app_launch_context(0, -1));
+    } catch (e) {
+      this._sendNotification(_('Could not open the link.') + ' 🙁', e.message);
     }
   }
 
@@ -372,6 +402,19 @@ export class ScreenOCR {
     });
   }
 
+  async _readCodes() {
+    if (!GLib.find_program_in_path(ZBARIMG)) {
+      return '';
+    }
+    try {
+      const stdout = await this._runCommandAsync(ZBARIMG, getZbarimgArgs(this._imageFile.get_path()));
+      return parseZbarimgOutput(stdout);
+    } catch (e) {
+      // zbarimg also fails when the area has no code: the text is read instead
+      return '';
+    }
+  }
+
   async _performOCR(languages, engine) {
     if (engine === 'easyocr') {
       return this._runEasyOCR(languages);
@@ -480,7 +523,7 @@ export class ScreenOCR {
     }
   }
 
-  async grabText(languages, engine) {
+  async grabText(languages, engine, readCodes = false) {
     try {
       await this._createTempFiles();
 
@@ -499,10 +542,15 @@ export class ScreenOCR {
         return true;
       }
 
-      const text = await this._performOCR(languages, engine);
+      // A code is read first: it is faster than OCR, which cannot read it
+      const code = readCodes ? await this._readCodes() : '';
+      const text = code || this._cancellable.is_cancelled() ? '' : await this._performOCR(languages, engine);
 
       if (this._cancellable.is_cancelled()) {
         // The extension has been disabled in the meantime
+      } else if (code) {
+        this._copyToClipboard(code);
+        this._notifyCode(code);
       } else if (text) {
         this._copyToClipboard(text);
         this._sendNotification(_('Text copied to the clipboard!') + ' 😀');

@@ -51,6 +51,22 @@ export default class extends ExtensionPreferences {
     });
     mainGroup.add(engineRow);
 
+    // QR codes and barcodes
+    const readCodesRow = new Adw.ActionRow({
+      title: _('Read QR codes and barcodes'),
+      subtitle: GLib.find_program_in_path('zbarimg')
+        ? _('When the selected area contains a code, its content is copied instead of the text.')
+        : _('zbar is not installed.')
+    });
+    const readCodesSwitch = new Gtk.Switch({
+      active: settings.get_boolean(schemaKeys.readCodes),
+      halign: Gtk.Align.END,
+      valign: Gtk.Align.CENTER
+    });
+    settings.bind(schemaKeys.readCodes, readCodesSwitch, 'active', Gio.SettingsBindFlags.DEFAULT);
+    readCodesRow.add_suffix(readCodesSwitch);
+    mainGroup.add(readCodesRow);
+
     // Shortcut group (mostly from https://github.com/eonpatapon/gnome-shell-extension-caffeine)
     let shortcutSettingWidget = new ShortcutSettingWidget(
       settings,
