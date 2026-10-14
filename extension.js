@@ -20,6 +20,7 @@ export default class extends Extension {
     this._keyboardShortcutChangeSignalHandler = null;
     this._settings = null;
     this._screenOCR = null;
+    this._quitSourceId = null;
   }
 
   enable() {
@@ -76,7 +77,8 @@ export default class extends Extension {
 
   _updateButton(show) {
     if (show && !this._button) {
-      this._button = new PanelMenu.Button(0.0, 'Text Grabber', true);
+      this._button = new PanelMenu.Button(0.0, 'Text Grabber');
+      // Gnome 50+: remove the gesture opening the menu with any button
       this._button.clear_actions();
 
       // Use an icon instead of text
@@ -86,12 +88,44 @@ export default class extends Extension {
       });
 
       this._button.add_child(icon);
+
+      // Menu opened with a right-click
+      this._button.menu.addAction(_('Settings'), () => this.openPreferences());
+      this._button.menu.addAction(_('Quit'), () => {
+        // Wait for the menu item to finish handling the click: disabling destroys it
+        this._quitSourceId = GLib.idle_add(GLib.PRIORITY_DEFAULT_IDLE, () => {
+          this._quitSourceId = null;
+          Main.extensionManager.disableExtension(this.uuid);
+          return GLib.SOURCE_REMOVE;
+        });
+      });
+
+      // Left-click grabs text, right-click opens the menu
       if (HAS_CONTROLLERS) {
         const clickGesture = new Clutter.ClickGesture();
-        clickGesture.connect('recognize', () => this._grabText());
+        clickGesture.connect('recognize', () => {
+          if (clickGesture.get_button() === Clutter.BUTTON_SECONDARY) {
+            this._button.menu.toggle();
+          } else {
+            this._grabText();
+          }
+        });
         this._button.add_action(clickGesture);
       } else {
-        this._button.connect('button-release-event', () => {
+        // PanelMenu.Button opens the menu on any press: only let the right button through
+        this._button.connect('event', (_actor, event) => {
+          const type = event.type();
+          if (type === Clutter.EventType.BUTTON_PRESS || type === Clutter.EventType.TOUCH_BEGIN) {
+            return type === Clutter.EventType.BUTTON_PRESS && event.get_button() === Clutter.BUTTON_SECONDARY
+              ? Clutter.EVENT_PROPAGATE
+              : Clutter.EVENT_STOP;
+          }
+          return Clutter.EVENT_PROPAGATE;
+        });
+        this._button.connect('button-release-event', (_actor, event) => {
+          if (event.get_button() === Clutter.BUTTON_SECONDARY) {
+            return Clutter.EVENT_PROPAGATE;
+          }
           this._grabText();
           return Clutter.EVENT_STOP;
         });
@@ -142,6 +176,10 @@ export default class extends Extension {
   }
 
   disable() {
+    if (this._quitSourceId) {
+      GLib.Source.remove(this._quitSourceId);
+      this._quitSourceId = null;
+    }
     // Remove the selection overlay if a grab is in progress
     this._screenOCR?.cancel();
     this._screenOCR = null;
