@@ -45,13 +45,14 @@ export class ScreenOCR {
         Main.notify(title, message);
         return;
       }
-      // Same notification as Main.notify(), with a button
+      // Like Main.notify(), with a button. Not transient: a transient notification
+      // is removed when its banner is hidden, and the button with it.
       const source = MessageTray.getSystemSource();
       const notification = new MessageTray.Notification({
         source,
         title,
         body: message,
-        isTransient: true,
+        isTransient: false,
       });
       notification.addAction(action.label, action.callback);
       source.addNotification(notification);
@@ -544,7 +545,7 @@ export class ScreenOCR {
 
       // A code is read first: it is faster than OCR, which cannot read it
       const code = readCodes ? await this._readCodes() : '';
-      const text = code || this._cancellable.is_cancelled() ? '' : await this._performOCR(languages, engine);
+      const text = (code || this._cancellable.is_cancelled()) ? '' : await this._performOCR(languages, engine);
 
       if (this._cancellable.is_cancelled()) {
         // The extension has been disabled in the meantime

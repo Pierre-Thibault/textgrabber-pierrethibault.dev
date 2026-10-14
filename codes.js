@@ -11,6 +11,10 @@ export function getZbarimgArgs(imagePath) {
     '--quiet',
     // Only the content of the codes, without the name of the symbology
     '--raw',
+    // When zbar is built with D-Bus (Debian, Ubuntu), the content of each code is
+    // also sent as a signal on the system bus, where any local user can read it.
+    // Ignored when zbar is built without D-Bus.
+    '--nodbus',
     '-Sdisable',
     ...SYMBOLOGIES.map(symbology => `-S${symbology}.enable`),
     imagePath,

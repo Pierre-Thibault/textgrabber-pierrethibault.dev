@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: textgrabber\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-15 04:25+0530\n"
+"POT-Creation-Date: 2026-10-15 04:26+0530\n"
 "PO-Revision-Date: 2025-06-19 21:00-0400\n"
 "Last-Translator: Pierre Thibault <pierre.thibault@pierrethibault.dev>\n"
 "Language-Team: Spanish <es@li.org>\n"
@@ -344,7 +344,7 @@ msgstr ""
 "EasyOCR es más lento e ignora los idiomas que no admite. Con «Ambos», se "
 "conserva el resultado más largo."
 
-#: prefs.js:45 screenocr.js:462
+#: prefs.js:45 screenocr.js:463
 msgid "EasyOCR is not installed."
 msgstr "EasyOCR no está instalado."
 
@@ -405,26 +405,26 @@ msgstr "es"
 msgid "New accelerator…"
 msgstr "Nuevo acelerador…"
 
-#: screenocr.js:66
+#: screenocr.js:67
 msgid "Open link"
 msgstr "Abrir enlace"
 
-#: screenocr.js:67
+#: screenocr.js:68
 msgid "QR code or barcode copied to the clipboard!"
 msgstr "Código QR o código de barras copiado al portapapeles!"
 
-#: screenocr.js:74
+#: screenocr.js:75
 msgid "Could not open the link."
 msgstr "No se pudo abrir el enlace."
 
-#: screenocr.js:556
+#: screenocr.js:557
 msgid "Text copied to the clipboard!"
 msgstr "Texto copiado al portapapeles!"
 
-#: screenocr.js:559
+#: screenocr.js:560
 msgid "OCR failed."
 msgstr "OCR falló."
 
-#: screenocr.js:565
+#: screenocr.js:566
 msgid "An error occurred during the OCR process."
 msgstr "Se ha producido un error durante el proceso de OCR."
