@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: textgrabber\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-14 16:10+0000\n"
+"POT-Creation-Date: 2026-10-15 04:25+0530\n"
 "PO-Revision-Date: 2026-05-11 17:19+0200\n"
 "Last-Translator: Uwe Senkler\n"
 "Language-Team: \n"
@@ -12,17 +12,25 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.9\n"
 
-#: extension.js:62
+#: extension.js:63
 msgid "Missing dependencies: "
 msgstr "Fehlende Abhängigkeiten: "
 
-#: extension.js:65
+#: extension.js:66
 msgid "Ensure to install Tesseract with your language(s)."
 msgstr "Installieren Sie Tesseract mit den gewünschten Sprachen."
 
-#: extension.js:68 prefs.js:105
+#: extension.js:69 prefs.js:105
 msgid "No known Tesseract languages installed."
 msgstr "Keine bekannte Tesseract-Sprache installiert."
+
+#: extension.js:93
+msgid "Settings"
+msgstr "Einstellungen"
+
+#: extension.js:94
+msgid "Quit"
+msgstr "Beenden"
 
 #: languages.js:113
 msgid "Afrikaans"
@@ -352,7 +360,9 @@ msgstr "QR-Codes und Barcodes lesen"
 msgid ""
 "When the selected area contains a code, its content is copied instead of the "
 "text."
-msgstr "Wenn der ausgewählte Bereich einen Code enthält, wird sein Inhalt statt des Textes kopiert."
+msgstr ""
+"Wenn der ausgewählte Bereich einen Code enthält, wird sein Inhalt statt des "
+"Textes kopiert."
 
 #: prefs.js:59
 msgid "zbar is not installed."

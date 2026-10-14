@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: textgrabber\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-14 16:10+0000\n"
+"POT-Creation-Date: 2026-10-15 04:25+0530\n"
 "PO-Revision-Date: 2025-06-19 21:00-0400\n"
 "Last-Translator: Pierre Thibault <pierre.thibault@pierrethibault.dev>\n"
 "Language-Team: English <en@li.org>\n"
@@ -11,17 +11,25 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: extension.js:62
+#: extension.js:63
 msgid "Missing dependencies: "
 msgstr "Missing dependencies: "
 
-#: extension.js:65
+#: extension.js:66
 msgid "Ensure to install Tesseract with your language(s)."
 msgstr "Ensure to install Tesseract with your language(s)."
 
-#: extension.js:68 prefs.js:105
+#: extension.js:69 prefs.js:105
 msgid "No known Tesseract languages installed."
 msgstr "No known Tesseract languages installed."
+
+#: extension.js:93
+msgid "Settings"
+msgstr "Settings"
+
+#: extension.js:94
+msgid "Quit"
+msgstr "Quit"
 
 #: languages.js:113
 msgid "Afrikaans"
@@ -351,7 +359,9 @@ msgstr "Read QR codes and barcodes"
 msgid ""
 "When the selected area contains a code, its content is copied instead of the "
 "text."
-msgstr "When the selected area contains a code, its content is copied instead of the text."
+msgstr ""
+"When the selected area contains a code, its content is copied instead of the "
+"text."
 
 #: prefs.js:59
 msgid "zbar is not installed."
