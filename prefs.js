@@ -67,6 +67,20 @@ export default class extends ExtensionPreferences {
     readCodesRow.add_suffix(readCodesSwitch);
     mainGroup.add(readCodesRow);
 
+    // Line breaks
+    const joinLinesRow = new Adw.ActionRow({
+      title: _('Join lines into paragraphs'),
+      subtitle: _('Removes the line breaks inside a paragraph and joins the words cut with a hyphen.')
+    });
+    const joinLinesSwitch = new Gtk.Switch({
+      active: settings.get_boolean(schemaKeys.joinLines),
+      halign: Gtk.Align.END,
+      valign: Gtk.Align.CENTER
+    });
+    settings.bind(schemaKeys.joinLines, joinLinesSwitch, 'active', Gio.SettingsBindFlags.DEFAULT);
+    joinLinesRow.add_suffix(joinLinesSwitch);
+    mainGroup.add(joinLinesRow);
+
     // Shortcut group (mostly from https://github.com/eonpatapon/gnome-shell-extension-caffeine)
     let shortcutSettingWidget = new ShortcutSettingWidget(
       settings,

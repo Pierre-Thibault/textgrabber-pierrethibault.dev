@@ -10,6 +10,7 @@ import Shell from 'gi://Shell';
 
 import { getWebLink, getZbarimgArgs, parseZbarimgOutput, ZBARIMG } from "./codes.js";
 import { getEasyOCRLanguages } from "./languages.js";
+import { joinLines } from "./lines.js";
 
 const Cursor = Clutter.CursorType ?? Meta.Cursor;
 
@@ -524,7 +525,7 @@ export class ScreenOCR {
     }
   }
 
-  async grabText(languages, engine, readCodes = false) {
+  async grabText(languages, engine, readCodes = false, joinTextLines = false) {
     try {
       await this._createTempFiles();
 
@@ -553,7 +554,7 @@ export class ScreenOCR {
         this._copyToClipboard(code);
         this._notifyCode(code);
       } else if (text) {
-        this._copyToClipboard(text);
+        this._copyToClipboard(joinTextLines ? joinLines(text) : text);
         this._sendNotification(_('Text copied to the clipboard!') + ' 😀');
       } else {
         // Keep the current clipboard content when no text is found

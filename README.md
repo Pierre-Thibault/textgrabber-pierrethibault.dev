@@ -28,6 +28,7 @@ Quite often, there is text on the screen that we cannot directly select. This co
 - Define the language(s) to use for Tesseract.
 - Choose the OCR engine: Tesseract, EasyOCR or both (the longest result is kept).
 - Read QR codes and barcodes: their content is copied instead of the text, and a link can be opened from the notification.
+- Optionally join the lines of a paragraph, so the text can be pasted without its line breaks.
 - The GUI offered in English, French and Spanish.
 
 ## Requirements

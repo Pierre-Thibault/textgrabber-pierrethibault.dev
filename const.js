@@ -5,4 +5,5 @@ export const schemaKeys = {
   textgrabberShortcut: "textgrabber-shortcut",
   ocrEngine: "ocr-engine",
   readCodes: "read-codes",
+  joinLines: "join-lines",
 };
