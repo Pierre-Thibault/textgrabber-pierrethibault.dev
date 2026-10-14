@@ -4,4 +4,5 @@ export const schemaKeys = {
   tesseractLanguages: "tesseract-languages",
   textgrabberShortcut: "textgrabber-shortcut",
   ocrEngine: "ocr-engine",
+  readCodes: "read-codes",
 };

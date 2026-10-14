@@ -27,6 +27,7 @@ Quite often, there is text on the screen that we cannot directly select. This co
 - Assign an optional keyboard shortcut for fast access.
 - Define the language(s) to use for Tesseract.
 - Choose the OCR engine: Tesseract, EasyOCR or both (the longest result is kept).
+- Read QR codes and barcodes: their content is copied instead of the text, and a link can be opened from the notification.
 - The GUI offered in English, French and Spanish.
 
 ## Requirements
@@ -34,6 +35,7 @@ Quite often, there is text on the screen that we cannot directly select. This co
 - Gnome 46, 47, 48, 49, 50 or 51
 - Tesseract with at least one language data model installed
 - Optional: [EasyOCR](https://github.com/JaidedAI/EasyOCR), sometimes better at reading text in images but slower. Install it with `pipx install easyocr`, then log out and log back in so that the `easyocr` command is found. EasyOCR downloads its models the first time it is used, and it ignores the selected languages it does not support.
+- Optional: [zbar](https://github.com/mchehab/zbar) to read QR codes and barcodes (QR, EAN, UPC and Code 128). Install the package that provides the `zbarimg` command, for example `zbar-tools` on Debian and Ubuntu or `zbar` on Fedora and Arch.
 
 ## Installation
 

@@ -22,3 +22,4 @@ Today, 2025-06-30, I begin the release history. There were two releases before, 
 	- German translation (contributed by uwe-ss)
 	- Optional EasyOCR engine, alone or with Tesseract (the longest result is kept)
 	- Right-click menu on the top panel icon: Settings and Quit
+	- Read QR codes and barcodes with zbar, and open links from the notification
