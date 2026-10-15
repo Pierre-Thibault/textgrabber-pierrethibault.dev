@@ -31,5 +31,10 @@
       <summary>Read QR codes and barcodes</summary>
       <description>When the selected area contains a QR code or a barcode, its content is copied instead of the text. Requires zbar (zbarimg).</description>
     </key>
+    <key name="join-lines" type="b">
+      <default>false</default>
+      <summary>Join lines into paragraphs</summary>
+      <description>Removes the line breaks inside a paragraph of the recognized text and joins the words cut with a hyphen. Empty lines between paragraphs and list items are kept.</description>
+    </key>
   </schema>
 </schemalist>

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: textgrabber\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-15 04:26+0530\n"
+"POT-Creation-Date: 2026-10-15 08:32+0000\n"
 "PO-Revision-Date: 2025-06-19 21:00-0400\n"
 "Last-Translator: Pierre Thibault <pierre.thibault@pierrethibault.dev>\n"
 "Language-Team: English <en@li.org>\n"
@@ -19,7 +19,7 @@ msgstr "Missing dependencies: "
 msgid "Ensure to install Tesseract with your language(s)."
 msgstr "Ensure to install Tesseract with your language(s)."
 
-#: extension.js:69 prefs.js:105
+#: extension.js:69 prefs.js:119
 msgid "No known Tesseract languages installed."
 msgstr "No known Tesseract languages installed."
 
@@ -343,7 +343,7 @@ msgstr ""
 "EasyOCR is slower and ignores the languages it does not support. With Both, "
 "the longest result is kept."
 
-#: prefs.js:45 screenocr.js:463
+#: prefs.js:45 screenocr.js:464
 msgid "EasyOCR is not installed."
 msgstr "EasyOCR is not installed."
 
@@ -367,63 +367,73 @@ msgstr ""
 msgid "zbar is not installed."
 msgstr "zbar is not installed."
 
-#: prefs.js:74
+#: prefs.js:72
+msgid "Join lines into paragraphs"
+msgstr "Join lines into paragraphs"
+
+#: prefs.js:73
+msgid ""
+"Removes the line breaks inside a paragraph and joins the words cut with a "
+"hyphen."
+msgstr "Removes the line breaks inside a paragraph and joins the words cut with a hyphen."
+
+#: prefs.js:88
 msgid "Toggle shortcut"
 msgstr "Toggle shortcut"
 
-#: prefs.js:75
+#: prefs.js:89
 msgid "Use Backspace to clear"
 msgstr "Use Backspace to clear"
 
-#: prefs.js:94
+#: prefs.js:108
 msgid "Shortcut"
 msgstr "Shortcut"
 
-#: prefs.js:104
+#: prefs.js:118
 msgid "Text Languages"
 msgstr "Text Languages"
 
-#: prefs.js:105
+#: prefs.js:119
 msgid "Select languages for OCR"
 msgstr "Select languages for OCR"
 
-#: prefs.js:134
+#: prefs.js:148
 msgid "No languages available"
 msgstr ""
 
-#: prefs.js:135
+#: prefs.js:149
 #, fuzzy
 msgid "Install Tesseract language data to enable OCR."
 msgstr "No known Tesseract languages installed."
 
-#: prefs.js:143
+#: prefs.js:157
 msgid "currentLanguage"
 msgstr "en"
 
-#: prefs.js:186 prefs.js:214
+#: prefs.js:200 prefs.js:228
 msgid "New accelerator…"
 msgstr "New accelerator…"
 
-#: screenocr.js:67
+#: screenocr.js:68
 msgid "Open link"
 msgstr "Open link"
 
-#: screenocr.js:68
+#: screenocr.js:69
 msgid "QR code or barcode copied to the clipboard!"
 msgstr "QR code or barcode copied to the clipboard!"
 
-#: screenocr.js:75
+#: screenocr.js:76
 msgid "Could not open the link."
 msgstr "Could not open the link."
 
-#: screenocr.js:557
+#: screenocr.js:558
 msgid "Text copied to the clipboard!"
 msgstr "Text copied to the clipboard!"
 
-#: screenocr.js:560
+#: screenocr.js:561
 msgid "OCR failed."
 msgstr "OCR failed."
 
-#: screenocr.js:566
+#: screenocr.js:567
 msgid "An error occurred during the OCR process."
 msgstr "An error occurred during the OCR process."
